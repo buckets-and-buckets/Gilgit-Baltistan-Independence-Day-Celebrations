@@ -2380,8 +2380,9 @@ function showLogin() {
   S.user = null; S.admin = false; S.loaded = false; S.guests = []; S.scans = []; S.verdict = null; S.openId = null;
   $('#l-title').textContent = CFG.eventName; $('#l-sub').textContent = [CFG.featuring, CFG.venue].filter(Boolean).join(' · ');
   const demo = Store.mode === 'demo';
-  $('#l-form').hidden = demo; $('#l-roles').hidden = !demo; $('#l-demo').hidden = !demo;
-  $('#l-demo').textContent = 'Demo mode: no Firebase settings found, so data stays on this device only. Choose a role to try the app.';
+  const local = /^(localhost|127\.0\.0\.1|)$/.test(location.hostname) || location.protocol === 'file:';
+  $('#l-form').hidden = demo; $('#l-roles').hidden = !demo || !local; $('#l-demo').hidden = !demo;
+  $('#l-demo').textContent = local ? 'Demo mode: no Firebase settings found, so data stays on this device only. Choose a role to try the app.' : 'Live mode is not set up yet. The owner must add the Firebase settings in index.html before anyone can sign in.';
   $('#l-err').textContent = ''; showView('login');
 }
 function showMain(u) {
@@ -2407,7 +2408,7 @@ $('#l-form').addEventListener('submit', async e => {
   try { const u0 = $('#l-email').value.trim().toLowerCase(); await Store.login(u0.includes('@') ? u0 : u0 + '@gbevent.com', $('#l-pass').value); }
   catch (err) {
     const c = (err && err.code) || '';
-    $('#l-err').textContent = /invalid-credential|wrong-password|user-not-found|invalid-email/.test(c) ? 'Wrong username or password.' : /too-many/.test(c) ? 'Too many attempts. Wait a few minutes and try again.' : /network/.test(c) ? 'No connection. Check the internet and try again.' : 'Could not sign in: ' + errMsg(err);
+    $('#l-err').textContent = /invalid-credential|wrong-password|user-not-found|invalid-email/.test(c) ? 'Wrong username or password.' : /too-many/.test(c) ? 'Too many attempts. Wait a few minutes and try again.' : /network/.test(c) ? 'No connection. Check the internet and try again.' : /operation-not-allowed/.test(c) ? 'Email/Password sign-in is not switched on in Firebase (Authentication > Sign-in method).' : /unauthorized-domain/.test(c) ? 'This website address is not added in Firebase (Authentication > Settings > Authorized domains).' : /api-key/.test(c) ? 'The Firebase apiKey in this page is wrong.' : 'Could not sign in: ' + errMsg(err);
   } finally { btn.disabled = false; }
 });
 function readHash() {
