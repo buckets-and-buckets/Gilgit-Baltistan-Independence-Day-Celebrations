@@ -176,7 +176,7 @@ window.APP_CONFIG = {
     </div>
     <div id="l-demo" class="demo" hidden></div>
     <form id="l-form" class="list" autocomplete="on">
-      <label>Email<input id="l-email" type="email" autocomplete="username" inputmode="email" required></label>
+      <label>Username<input id="l-email" type="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required></label>
       <label>Password<input id="l-pass" type="password" autocomplete="current-password" required></label>
       <button class="btn" type="submit" id="l-go">Sign in</button>
     </form>
@@ -2404,10 +2404,10 @@ function showMain(u) {
 }
 $('#l-form').addEventListener('submit', async e => {
   e.preventDefault(); const btn = $('#l-go'); btn.disabled = true; $('#l-err').textContent = '';
-  try { await Store.login($('#l-email').value.trim(), $('#l-pass').value); }
+  try { const u0 = $('#l-email').value.trim().toLowerCase(); await Store.login(u0.includes('@') ? u0 : u0 + '@gbevent.com', $('#l-pass').value); }
   catch (err) {
     const c = (err && err.code) || '';
-    $('#l-err').textContent = /invalid-credential|wrong-password|user-not-found|invalid-email/.test(c) ? 'Wrong email or password.' : /too-many/.test(c) ? 'Too many attempts. Wait a few minutes and try again.' : /network/.test(c) ? 'No connection. Check the internet and try again.' : 'Could not sign in: ' + errMsg(err);
+    $('#l-err').textContent = /invalid-credential|wrong-password|user-not-found|invalid-email/.test(c) ? 'Wrong username or password.' : /too-many/.test(c) ? 'Too many attempts. Wait a few minutes and try again.' : /network/.test(c) ? 'No connection. Check the internet and try again.' : 'Could not sign in: ' + errMsg(err);
   } finally { btn.disabled = false; }
 });
 function readHash() {
