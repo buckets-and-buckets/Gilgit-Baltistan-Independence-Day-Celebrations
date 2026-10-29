@@ -141,6 +141,7 @@ window.APP_CONFIG = {
   tagline:   'Live music and dinner buffet',
   venue:     'Intercity Hotel, Bausher',
   currency:  'OMR',
+  pricePerHead: 10,   // ticket price per head in OMR (admin can still change it in Summary)
 
   // The public address of this page once it is on GitHub Pages, for example
   // 'https://yourname.github.io/gb-event/'. It is written inside every QR code.
@@ -149,7 +150,7 @@ window.APP_CONFIG = {
 
   // Emails that get the ADMIN role. Must match the list in firestore.rules (lowercase).
   // Everyone else who signs in is gate staff (scan and admit only).
-  adminEmails: ['admin@example.com'],
+  adminEmails: ['admin@gbevent.com'],
 
   // Paste your Firebase web app settings here (Firebase console > Project settings).
   // Leave as null to run in DEMO MODE (data stays on this one device).
@@ -1686,7 +1687,8 @@ function makeDemoStore() {
    STATE AND HELPERS
    ============================================================ */
 let Store = null;
-const S = { user: null, admin: false, cfg: { price: null, date: '' }, guests: [], scans: [], loaded: false, conn: 'Connecting',
+const DEFAULT_PRICE = (CFG.pricePerHead != null && !isNaN(+CFG.pricePerHead)) ? +CFG.pricePerHead : null;
+const S = { user: null, admin: false, cfg: { price: DEFAULT_PRICE, date: '' }, guests: [], scans: [], loaded: false, conn: 'Connecting',
   tab: 'scan', filter: 'all', logFilter: 'all', openId: null, verdict: null, auto: lsGet('gbid-auto', '1') === '1', pending: null, handling: false };
 const ui = {};            // per-guest door state {n, method}
 let overlayState = {}, unsubs = [];
@@ -2388,7 +2390,7 @@ function showMain(u) {
   $('#h-title').textContent = CFG.eventName;
   showView('main'); renderNav(); renderAll();
   const onErr = what => e => { S.conn = 'Offline'; renderHeader(); toast(what + ': ' + niceErr(e), true); };
-  unsubs.push(Store.watch('config', c => { S.cfg = { price: c && c.price != null ? +c.price : null, date: (c && c.date) || '' }; renderAll(); }, onErr('Settings')));
+  unsubs.push(Store.watch('config', c => { S.cfg = { price: c && c.price != null ? +c.price : DEFAULT_PRICE, date: (c && c.date) || '' }; renderAll(); }, onErr('Settings')));
   unsubs.push(Store.watch('guests', gs => {
     S.guests = gs; S.loaded = true; S.conn = 'Live';
     if (S.openId && !byCode(S.openId)) S.openId = null;
