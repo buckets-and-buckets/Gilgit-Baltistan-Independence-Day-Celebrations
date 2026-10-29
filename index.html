@@ -1,1 +1,2448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#27479A">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src blob:; worker-src blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex,nofollow">
+<title>GB Independence Day Entry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F2F4F7; --surface:#FFFFFF; --ink:#16202C; --muted:#5B6877; --line:#D9DFE6;
+  --accent:#27479A; --accent-ink:#FFFFFF; --accent-soft:#E4EAF8;
+  --ok:#17663A; --ok-bg:#DDF3E4; --warn:#7A4E00; --warn-bg:#FCEBC8; --bad:#9B1C2B; --bad-bg:#FADADD; --done:#4A5562; --done-bg:#E6E9EE;
+  --display:"Fraunces",Georgia,serif; --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#0F1620; --surface:#18222F; --ink:#E8EDF3; --muted:#98A5B5; --line:#2B3949;
+  --accent:#8FA8F0; --accent-ink:#0F1620; --accent-soft:#222E4A;
+  --ok:#7FD6A1; --ok-bg:#17382A; --warn:#F0C46A; --warn-bg:#3F3217; --bad:#F29AA5; --bad-bg:#432026; --done:#B6C0CC; --done-bg:#243040; color-scheme:dark}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 var(--body);padding-block:max(12px,env(safe-area-inset-top,0px)) calc(40px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+[hidden]{display:none!important}
+.wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+h1{font:600 21px/1.2 var(--display);margin:0;text-wrap:balance}
+.sub{color:var(--muted);font-size:13px;margin-top:4px}
+.who{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+.role{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.live{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.live.on .dot{background:var(--ok)}
+.strip{display:grid;gap:8px}
+.strip.s2{grid-template-columns:repeat(2,minmax(0,1fr))}.strip.s3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+.stat b{display:block;font-size:20px;font-variant-numeric:tabular-nums;line-height:1.2}
+.stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+nav{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;background:var(--line);padding:4px;border-radius:12px}
+nav button{border:0;background:transparent;color:var(--muted);font:600 14px var(--body);padding:11px 6px;border-radius:9px;cursor:pointer}
+nav button[aria-selected="true"]{background:var(--surface);color:var(--ink)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%;min-width:0}
+textarea{min-height:120px;resize:vertical}
+label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;min-width:0}
+label input,label select,label textarea{text-transform:none;letter-spacing:0;font-weight:400;color:var(--ink)}
+label.check{flex-direction:row;align-items:center;gap:10px;text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink);font-weight:500}
+label.check input{width:22px;height:22px;flex-shrink:0}
+#q{font-size:18px;padding:14px 16px;border-width:2px}
+.btn{display:block;text-align:center;text-decoration:none;font:600 15px var(--body);border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);padding:13px 16px;cursor:pointer;width:100%}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.small{display:inline-block;width:auto;padding:8px 12px;font-size:13px}
+.btn.danger{border-color:var(--bad);background:transparent;color:var(--bad)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.list{display:flex;flex-direction:column;gap:10px}
+.g{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.g.done{background:var(--done-bg)}
+.g.rev{opacity:.7}
+.g.has-tk{display:flex;align-items:stretch}
+.g-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 14px;width:100%;border:0;background:transparent;color:inherit;text-align:left;font:inherit;cursor:pointer;min-width:0}
+.tkb{border:0;border-left:1px solid var(--line);background:var(--accent-soft);color:var(--accent);font:700 13px var(--body);padding:0 14px;cursor:pointer;flex-shrink:0}
+.g-name{font-weight:600;font-size:16px;overflow-wrap:anywhere}
+.g-meta{font-size:13px;color:var(--muted);margin-top:2px;overflow-wrap:anywhere}
+.pills{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.pill{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.warn{background:var(--warn-bg);color:var(--warn)}
+.pill.bad{background:var(--bad-bg);color:var(--bad)} .pill.done{background:var(--done-bg);color:var(--done);border:1px solid var(--line)}
+.pill.info{background:var(--accent-soft);color:var(--accent)}
+.g-act{border-top:1px solid var(--line);padding:14px;display:flex;flex-direction:column;gap:12px}
+.due{display:flex;justify-content:space-between;align-items:baseline;font-variant-numeric:tabular-nums}
+.due b{font-size:22px}
+.chips{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 14px var(--body);padding:11px 8px;border-radius:10px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.stepper{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.stepper .ctl{display:flex;align-items:center;gap:10px}
+.stepper button{width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:22px;cursor:pointer}
+.stepper output{min-width:32px;text-align:center;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.hint{color:var(--muted);font-size:13px}
+.empty{padding:22px 14px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+.empty b{display:block;color:var(--ink);font-size:16px;margin-bottom:4px}
+.steps{text-align:left;margin:10px auto 0;padding-left:20px;max-width:340px;color:var(--ink)}
+.steps li{margin:4px 0}
+.banner{background:var(--warn-bg);color:var(--warn);border-radius:10px;padding:12px 14px;font-size:14px;display:flex;flex-direction:column;gap:8px}
+.banner .row{display:flex;gap:8px}
+.banner input{color:var(--ink)}
+.banner .btn{border-color:currentColor;background:transparent;color:inherit}
+.verdict{display:flex;gap:14px;align-items:center;border-radius:12px;padding:16px}
+.verdict .ic{flex-shrink:0;width:52px;height:52px;border-radius:50%;border:3px solid currentColor;display:grid;place-items:center;font-size:28px;font-weight:700;line-height:1}
+.verdict b{display:block;font-size:22px;line-height:1.2}
+.verdict span{color:var(--ink);font-size:14px;overflow-wrap:anywhere}
+.verdict.ok{background:var(--ok-bg);color:var(--ok)} .verdict.warn{background:var(--warn-bg);color:var(--warn)} .verdict.bad{background:var(--bad-bg);color:var(--bad)}
+.cam{position:relative;background:#000;border-radius:14px;overflow:hidden;aspect-ratio:4/3;max-height:48vh;width:100%;outline:5px solid transparent;outline-offset:-5px;transition:outline-color .15s}
+.cam video{width:100%;height:100%;object-fit:cover;display:block}
+.cam .frame{position:absolute;inset:16% 16%;border:3px solid rgba(255,255,255,.85);border-radius:16px;pointer-events:none}
+.cam .tools{position:absolute;left:8px;right:8px;bottom:8px;display:flex;gap:8px;justify-content:space-between}
+.cam .tools button{background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:8px 14px;font:600 13px var(--body);cursor:pointer}
+.cam.f-ok{outline-color:#2ECC71}.cam.f-warn{outline-color:#F5B301}.cam.f-bad{outline-color:#E5484D}
+.filters{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.filters .chip{white-space:nowrap;padding:8px 12px;font-size:13px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rows{display:flex;flex-direction:column}
+.rows div{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.rows div:last-child{border-bottom:0}
+h2{font:600 17px var(--display);margin:0 0 6px}
+.logrow{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.logrow .t{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.overlay{position:fixed;inset:0;background:rgba(8,12,18,.55);display:flex;align-items:flex-end;justify-content:center;z-index:20;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) 0 env(safe-area-inset-left,0px)}
+.sheet{background:var(--bg);width:100%;max-width:560px;max-height:92%;overflow-y:auto;border-radius:16px 16px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px}
+.ticket{background:#FFFFFF;color:#16202C;border:1px solid #D9DFE6;border-radius:16px;overflow:hidden;text-align:center}
+.tk-top{background:#27479A;color:#FFFFFF;padding:14px 12px}
+.tk-top b{display:block;font:600 19px/1.2 "Fraunces",Georgia,serif}
+.tk-top span{display:block;font-size:12px;opacity:.92;margin-top:4px}
+.tk-qr{padding:16px 24px 6px}
+.tk-qr svg{display:block;width:100%;max-width:250px;height:auto;margin:0 auto}
+.tk-code{font:700 20px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.1em;margin-top:2px}
+.tk-name{font:600 20px/1.2 "Fraunces",Georgia,serif;margin-top:12px;padding:0 12px;overflow-wrap:anywhere}
+.tk-meta{font-size:13px;color:#4A5562;margin:4px 12px 0}
+.tk-foot{font-size:12px;color:#4A5562;padding:12px 12px 16px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;z-index:30;max-width:90%;text-align:center}
+.toast.err{background:var(--bad);color:#fff}
+.center{min-height:60vh;display:grid;place-items:center;text-align:center;color:var(--muted)}
+.login{max-width:380px;margin:6vh auto 0;display:flex;flex-direction:column;gap:12px}
+.err{color:var(--bad);font-size:14px;min-height:20px}
+.demo{background:var(--accent-soft);color:var(--accent);border-radius:10px;padding:10px 14px;font-size:13px}
+@media (prefers-reduced-motion:no-preference){.g,.pill,.chip{transition:background .15s}}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     EDIT THIS BLOCK ONLY. See SETUP-GUIDE.md for step by step help.
+     ============================================================ -->
+<script>
+window.APP_CONFIG = {
+  eventName: 'Gilgit Baltistan Independence Day Celebrations',
+  featuring: 'Featuring Salman Paras',
+  tagline:   'Live music and dinner buffet',
+  venue:     'Intercity Hotel, Bausher',
+  currency:  'OMR',
+  pricePerHead: 10,   // ticket price per head in OMR (admin can still change it in Summary)
+
+  // The public address of this page once it is on GitHub Pages, for example
+  // 'https://yourname.github.io/gb-event/'. It is written inside every QR code.
+  // Leave empty to use whatever address the page is opened from.
+  siteUrl: '',
+
+  // Emails that get the ADMIN role. Must match the list in firestore.rules (lowercase).
+  // Everyone else who signs in is gate staff (scan and admit only).
+  adminEmails: ['admin@gbevent.com'],
+
+  // Paste your Firebase web app settings here (Firebase console > Project settings).
+  // Leave as null to run in DEMO MODE (data stays on this one device).
+  firebase: {
+    apiKey: 'AIzaSyBpxZBIqk5diFyk1kK3vMPogpLIJ1BCyms',
+    authDomain: 'gb-independence-day.firebaseapp.com',
+    projectId: 'gb-independence-day',
+    appId: '1:677167998048:web:95a76b01c31e929e084f05'
+  }
+  /* Example:
+  firebase: {
+    apiKey: '...', authDomain: 'your-project.firebaseapp.com',
+    projectId: 'your-project', appId: '...'
+  } */
+};
+</script>
+
+<div class="wrap" id="v-boot"><div class="center">Loading…</div></div>
+
+<div class="wrap" id="v-login" hidden>
+  <div class="login">
+    <div>
+      <h1 id="l-title"></h1>
+      <div class="sub" id="l-sub"></div>
+    </div>
+    <div id="l-demo" class="demo" hidden></div>
+    <form id="l-form" class="list" autocomplete="on">
+      <label>Username<input id="l-email" type="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required></label>
+      <label>Password<input id="l-pass" type="password" autocomplete="current-password" required></label>
+      <button class="btn" type="submit" id="l-go">Sign in</button>
+    </form>
+    <div id="l-roles" class="list" hidden>
+      <button class="btn" data-act="demo-admin">Continue as Admin</button>
+      <button class="btn ghost" data-act="demo-gate">Continue as Gate staff</button>
+    </div>
+    <div class="err" id="l-err" role="alert"></div>
+  </div>
+</div>
+
+<div class="wrap" id="v-main" hidden>
+  <header>
+    <div style="min-width:0">
+      <h1 id="h-title"></h1>
+      <div class="sub" id="evsub"></div>
+    </div>
+    <div class="who">
+      <span class="role" id="h-role"></span>
+      <div class="live" id="live"><span class="dot"></span><span id="livetxt">Connecting</span></div>
+      <button class="btn ghost small" data-act="logout">Sign out</button>
+    </div>
+  </header>
+  <div id="demo-note" class="demo" hidden>Demo mode: data stays on this device only. Add your Firebase settings to share data between phones.</div>
+  <div class="strip" id="strip" aria-live="polite"></div>
+  <nav id="nav" role="tablist" aria-label="Sections"></nav>
+
+  <section id="p-scan">
+    <div class="list">
+      <div class="cam" id="cam" hidden>
+        <video id="vid" playsinline muted autoplay></video>
+        <div class="frame"></div>
+        <div class="tools">
+          <button data-act="flip">Flip camera</button>
+          <button data-act="torch" id="torchbtn" hidden>Torch</button>
+          <button data-act="camstop">Stop</button>
+        </div>
+      </div>
+      <button class="btn" id="camstart" data-act="camstart">Start camera scanner</button>
+      <div class="hint" id="camnote"></div>
+      <label class="check"><input type="checkbox" id="auto"> Admit automatically when a valid ticket is scanned</label>
+      <div id="verdict"></div>
+      <input id="q" type="search" placeholder="Name, phone or ticket code" autocomplete="off" inputmode="search" aria-label="Find a guest">
+      <div class="row2" id="actrow">
+        <button class="btn ghost" data-act="photo">Scan from photo</button>
+        <button class="btn ghost" data-act="walkin" id="walkinbtn">Register walk-in</button>
+      </div>
+      <input id="scanfile" type="file" accept="image/*" capture="environment" hidden>
+      <div id="results" class="list"></div>
+    </div>
+  </section>
+
+  <section id="p-guests" hidden>
+    <div class="list">
+      <div class="row2">
+        <button class="btn" data-act="add">Add guest</button>
+        <button class="btn ghost" data-act="import">Import list</button>
+      </div>
+      <input id="gq" type="search" placeholder="Search guests" autocomplete="off" aria-label="Search guests">
+      <div class="filters" id="filters"></div>
+      <div id="glist" class="list"></div>
+    </div>
+  </section>
+
+  <section id="p-summary" hidden><div class="list" id="sumbody"></div></section>
+  <section id="p-log" hidden><div class="list" id="logbody"></div></section>
+</div>
+
+<div class="wrap" id="v-ticket" hidden>
+  <div class="login" style="max-width:420px">
+    <div class="ticket" id="gt-card"></div>
+    <button class="btn" data-act="gt-save">Save ticket image</button>
+    <div class="hint" style="text-align:center">Show this QR code at the entrance. Keep this link private: anyone who has it can use your ticket.</div>
+  </div>
+</div>
+
+<div id="overlay" class="overlay" hidden></div>
+<div id="toast" class="toast" hidden></div>
+
+<script>
+/* QR encoder: QRCode for JavaScript, Copyright (c) 2009 Kazuhiko Arase, MIT license (http://www.d-project.com/). The word QR Code is a registered trademark of DENSO WAVE INCORPORATED. */
+var QRLib=(function(){var defs={},cache={};function req(n){n=n.replace('./','');if(cache[n])return cache[n].exports;var m={exports:{}};cache[n]=m;defs[n](m,m.exports,req);return m.exports;}
+defs['QRMode']=function(module,exports,require){
+module.exports = {
+    MODE_NUMBER :       1 << 0,
+    MODE_ALPHA_NUM :    1 << 1,
+    MODE_8BIT_BYTE :    1 << 2,
+    MODE_KANJI :        1 << 3
+};
+
+};
+defs['QRErrorCorrectLevel']=function(module,exports,require){
+module.exports = {
+	L : 1,
+	M : 0,
+	Q : 3,
+	H : 2
+};
+
+
+};
+defs['QRMaskPattern']=function(module,exports,require){
+module.exports = {
+	PATTERN000 : 0,
+	PATTERN001 : 1,
+	PATTERN010 : 2,
+	PATTERN011 : 3,
+	PATTERN100 : 4,
+	PATTERN101 : 5,
+	PATTERN110 : 6,
+	PATTERN111 : 7
+};
+
+};
+defs['QRMath']=function(module,exports,require){
+var QRMath = {
+
+	glog : function(n) {
+	
+		if (n < 1) {
+			throw new Error("glog(" + n + ")");
+		}
+		
+		return QRMath.LOG_TABLE[n];
+	},
+	
+	gexp : function(n) {
+	
+		while (n < 0) {
+			n += 255;
+		}
+	
+		while (n >= 256) {
+			n -= 255;
+		}
+	
+		return QRMath.EXP_TABLE[n];
+	},
+	
+	EXP_TABLE : new Array(256),
+	
+	LOG_TABLE : new Array(256)
+
+};
+	
+for (var i = 0; i < 8; i++) {
+	QRMath.EXP_TABLE[i] = 1 << i;
+}
+for (var i = 8; i < 256; i++) {
+	QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4]
+		^ QRMath.EXP_TABLE[i - 5]
+		^ QRMath.EXP_TABLE[i - 6]
+		^ QRMath.EXP_TABLE[i - 8];
+}
+for (var i = 0; i < 255; i++) {
+	QRMath.LOG_TABLE[QRMath.EXP_TABLE[i] ] = i;
+}
+
+module.exports = QRMath;
+
+};
+defs['QRPolynomial']=function(module,exports,require){
+var QRMath = require('./QRMath');
+
+function QRPolynomial(num, shift) {
+	if (num.length === undefined) {
+		throw new Error(num.length + "/" + shift);
+	}
+
+	var offset = 0;
+
+	while (offset < num.length && num[offset] === 0) {
+		offset++;
+	}
+
+	this.num = new Array(num.length - offset + shift);
+	for (var i = 0; i < num.length - offset; i++) {
+		this.num[i] = num[i + offset];
+	}
+}
+
+QRPolynomial.prototype = {
+
+	get : function(index) {
+		return this.num[index];
+	},
+	
+	getLength : function() {
+		return this.num.length;
+	},
+	
+	multiply : function(e) {
+	
+		var num = new Array(this.getLength() + e.getLength() - 1);
+	
+		for (var i = 0; i < this.getLength(); i++) {
+			for (var j = 0; j < e.getLength(); j++) {
+				num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i) ) + QRMath.glog(e.get(j) ) );
+			}
+		}
+	
+		return new QRPolynomial(num, 0);
+	},
+	
+	mod : function(e) {
+	
+		if (this.getLength() - e.getLength() < 0) {
+			return this;
+		}
+	
+		var ratio = QRMath.glog(this.get(0) ) - QRMath.glog(e.get(0) );
+	
+		var num = new Array(this.getLength() );
+		
+		for (var i = 0; i < this.getLength(); i++) {
+			num[i] = this.get(i);
+		}
+		
+		for (var x = 0; x < e.getLength(); x++) {
+			num[x] ^= QRMath.gexp(QRMath.glog(e.get(x) ) + ratio);
+		}
+	
+		// recursive call
+		return new QRPolynomial(num, 0).mod(e);
+	}
+};
+
+module.exports = QRPolynomial;
+
+};
+defs['QRUtil']=function(module,exports,require){
+var QRMode = require('./QRMode');
+var QRPolynomial = require('./QRPolynomial');
+var QRMath = require('./QRMath');
+var QRMaskPattern = require('./QRMaskPattern');
+
+var QRUtil = {
+
+    PATTERN_POSITION_TABLE : [
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],        
+        [6, 32, 58],
+        [6, 34, 62],
+        [6, 26, 46, 66],
+        [6, 26, 48, 70],
+        [6, 26, 50, 74],
+        [6, 30, 54, 78],
+        [6, 30, 56, 82],
+        [6, 30, 58, 86],
+        [6, 34, 62, 90],
+        [6, 28, 50, 72, 94],
+        [6, 26, 50, 74, 98],
+        [6, 30, 54, 78, 102],
+        [6, 28, 54, 80, 106],
+        [6, 32, 58, 84, 110],
+        [6, 30, 58, 86, 114],
+        [6, 34, 62, 90, 118],
+        [6, 26, 50, 74, 98, 122],
+        [6, 30, 54, 78, 102, 126],
+        [6, 26, 52, 78, 104, 130],
+        [6, 30, 56, 82, 108, 134],
+        [6, 34, 60, 86, 112, 138],
+        [6, 30, 58, 86, 114, 142],
+        [6, 34, 62, 90, 118, 146],
+        [6, 30, 54, 78, 102, 126, 150],
+        [6, 24, 50, 76, 102, 128, 154],
+        [6, 28, 54, 80, 106, 132, 158],
+        [6, 32, 58, 84, 110, 136, 162],
+        [6, 26, 54, 82, 110, 138, 166],
+        [6, 30, 58, 86, 114, 142, 170]
+    ],
+
+    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
+    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
+    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
+
+    getBCHTypeInfo : function(data) {
+        var d = data << 10;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
+        }
+        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+    },
+
+    getBCHTypeNumber : function(data) {
+        var d = data << 12;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
+        }
+        return (data << 12) | d;
+    },
+
+    getBCHDigit : function(data) {
+
+        var digit = 0;
+
+        while (data !== 0) {
+            digit++;
+            data >>>= 1;
+        }
+
+        return digit;
+    },
+
+    getPatternPosition : function(typeNumber) {
+        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+
+    getMask : function(maskPattern, i, j) {
+        
+        switch (maskPattern) {
+            
+        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
+        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
+        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
+        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
+        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
+        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
+        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
+        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
+
+        default :
+            throw new Error("bad maskPattern:" + maskPattern);
+        }
+    },
+
+    getErrorCorrectPolynomial : function(errorCorrectLength) {
+
+        var a = new QRPolynomial([1], 0);
+
+        for (var i = 0; i < errorCorrectLength; i++) {
+            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
+        }
+
+        return a;
+    },
+
+    getLengthInBits : function(mode, type) {
+
+        if (1 <= type && type < 10) {
+
+            // 1 - 9
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 10;
+            case QRMode.MODE_ALPHA_NUM  : return 9;
+            case QRMode.MODE_8BIT_BYTE  : return 8;
+            case QRMode.MODE_KANJI      : return 8;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 27) {
+
+            // 10 - 26
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 12;
+            case QRMode.MODE_ALPHA_NUM  : return 11;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 10;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 41) {
+
+            // 27 - 40
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 14;
+            case QRMode.MODE_ALPHA_NUM  : return 13;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 12;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else {
+            throw new Error("type:" + type);
+        }
+    },
+
+    getLostPoint : function(qrCode) {
+        
+        var moduleCount = qrCode.getModuleCount();
+        var lostPoint = 0;
+        var row = 0; 
+        var col = 0;
+
+        
+        // LEVEL1
+        
+        for (row = 0; row < moduleCount; row++) {
+
+            for (col = 0; col < moduleCount; col++) {
+
+                var sameCount = 0;
+                var dark = qrCode.isDark(row, col);
+
+                for (var r = -1; r <= 1; r++) {
+
+                    if (row + r < 0 || moduleCount <= row + r) {
+                        continue;
+                    }
+
+                    for (var c = -1; c <= 1; c++) {
+
+                        if (col + c < 0 || moduleCount <= col + c) {
+                            continue;
+                        }
+
+                        if (r === 0 && c === 0) {
+                            continue;
+                        }
+
+                        if (dark === qrCode.isDark(row + r, col + c) ) {
+                            sameCount++;
+                        }
+                    }
+                }
+
+                if (sameCount > 5) {
+                    lostPoint += (3 + sameCount - 5);
+                }
+            }
+        }
+
+        // LEVEL2
+
+        for (row = 0; row < moduleCount - 1; row++) {
+            for (col = 0; col < moduleCount - 1; col++) {
+                var count = 0;
+                if (qrCode.isDark(row,     col    ) ) count++;
+                if (qrCode.isDark(row + 1, col    ) ) count++;
+                if (qrCode.isDark(row,     col + 1) ) count++;
+                if (qrCode.isDark(row + 1, col + 1) ) count++;
+                if (count === 0 || count === 4) {
+                    lostPoint += 3;
+                }
+            }
+        }
+
+        // LEVEL3
+
+        for (row = 0; row < moduleCount; row++) {
+            for (col = 0; col < moduleCount - 6; col++) {
+                if (qrCode.isDark(row, col) && 
+                        !qrCode.isDark(row, col + 1) && 
+                         qrCode.isDark(row, col + 2) && 
+                         qrCode.isDark(row, col + 3) && 
+                         qrCode.isDark(row, col + 4) && 
+                        !qrCode.isDark(row, col + 5) && 
+                         qrCode.isDark(row, col + 6) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount - 6; row++) {
+                if (qrCode.isDark(row, col) &&
+                        !qrCode.isDark(row + 1, col) &&
+                         qrCode.isDark(row + 2, col) &&
+                         qrCode.isDark(row + 3, col) &&
+                         qrCode.isDark(row + 4, col) &&
+                        !qrCode.isDark(row + 5, col) &&
+                         qrCode.isDark(row + 6, col) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        // LEVEL4
+        
+        var darkCount = 0;
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount; row++) {
+                if (qrCode.isDark(row, col) ) {
+                    darkCount++;
+                }
+            }
+        }
+        
+        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+        lostPoint += ratio * 10;
+
+        return lostPoint;       
+    }
+
+};
+
+module.exports = QRUtil;
+
+};
+defs['QRRSBlock']=function(module,exports,require){
+var QRErrorCorrectLevel = require('./QRErrorCorrectLevel');
+
+function QRRSBlock(totalCount, dataCount) {
+	this.totalCount = totalCount;
+	this.dataCount  = dataCount;
+}
+
+QRRSBlock.RS_BLOCK_TABLE = [
+
+	// L
+	// M
+	// Q
+	// H
+
+	// 1
+	[1, 26, 19],
+	[1, 26, 16],
+	[1, 26, 13],
+	[1, 26, 9],
+	
+	// 2
+	[1, 44, 34],
+	[1, 44, 28],
+	[1, 44, 22],
+	[1, 44, 16],
+
+	// 3
+	[1, 70, 55],
+	[1, 70, 44],
+	[2, 35, 17],
+	[2, 35, 13],
+
+	// 4		
+	[1, 100, 80],
+	[2, 50, 32],
+	[2, 50, 24],
+	[4, 25, 9],
+	
+	// 5
+	[1, 134, 108],
+	[2, 67, 43],
+	[2, 33, 15, 2, 34, 16],
+	[2, 33, 11, 2, 34, 12],
+	
+	// 6
+	[2, 86, 68],
+	[4, 43, 27],
+	[4, 43, 19],
+	[4, 43, 15],
+	
+	// 7		
+	[2, 98, 78],
+	[4, 49, 31],
+	[2, 32, 14, 4, 33, 15],
+	[4, 39, 13, 1, 40, 14],
+	
+	// 8
+	[2, 121, 97],
+	[2, 60, 38, 2, 61, 39],
+	[4, 40, 18, 2, 41, 19],
+	[4, 40, 14, 2, 41, 15],
+	
+	// 9
+	[2, 146, 116],
+	[3, 58, 36, 2, 59, 37],
+	[4, 36, 16, 4, 37, 17],
+	[4, 36, 12, 4, 37, 13],
+	
+	// 10		
+	[2, 86, 68, 2, 87, 69],
+	[4, 69, 43, 1, 70, 44],
+	[6, 43, 19, 2, 44, 20],
+	[6, 43, 15, 2, 44, 16],
+
+	// 11
+	[4, 101, 81],
+	[1, 80, 50, 4, 81, 51],
+	[4, 50, 22, 4, 51, 23],
+	[3, 36, 12, 8, 37, 13],
+
+	// 12
+	[2, 116, 92, 2, 117, 93],
+	[6, 58, 36, 2, 59, 37],
+	[4, 46, 20, 6, 47, 21],
+	[7, 42, 14, 4, 43, 15],
+
+	// 13
+	[4, 133, 107],
+	[8, 59, 37, 1, 60, 38],
+	[8, 44, 20, 4, 45, 21],
+	[12, 33, 11, 4, 34, 12],
+
+	// 14
+	[3, 145, 115, 1, 146, 116],
+	[4, 64, 40, 5, 65, 41],
+	[11, 36, 16, 5, 37, 17],
+	[11, 36, 12, 5, 37, 13],
+
+	// 15
+	[5, 109, 87, 1, 110, 88],
+	[5, 65, 41, 5, 66, 42],
+	[5, 54, 24, 7, 55, 25],
+	[11, 36, 12],
+
+	// 16
+	[5, 122, 98, 1, 123, 99],
+	[7, 73, 45, 3, 74, 46],
+	[15, 43, 19, 2, 44, 20],
+	[3, 45, 15, 13, 46, 16],
+
+	// 17
+	[1, 135, 107, 5, 136, 108],
+	[10, 74, 46, 1, 75, 47],
+	[1, 50, 22, 15, 51, 23],
+	[2, 42, 14, 17, 43, 15],
+
+	// 18
+	[5, 150, 120, 1, 151, 121],
+	[9, 69, 43, 4, 70, 44],
+	[17, 50, 22, 1, 51, 23],
+	[2, 42, 14, 19, 43, 15],
+
+	// 19
+	[3, 141, 113, 4, 142, 114],
+	[3, 70, 44, 11, 71, 45],
+	[17, 47, 21, 4, 48, 22],
+	[9, 39, 13, 16, 40, 14],
+
+	// 20
+	[3, 135, 107, 5, 136, 108],
+	[3, 67, 41, 13, 68, 42],
+	[15, 54, 24, 5, 55, 25],
+	[15, 43, 15, 10, 44, 16],
+
+	// 21
+	[4, 144, 116, 4, 145, 117],
+	[17, 68, 42],
+	[17, 50, 22, 6, 51, 23],
+	[19, 46, 16, 6, 47, 17],
+
+	// 22
+	[2, 139, 111, 7, 140, 112],
+	[17, 74, 46],
+	[7, 54, 24, 16, 55, 25],
+	[34, 37, 13],
+
+	// 23
+	[4, 151, 121, 5, 152, 122],
+	[4, 75, 47, 14, 76, 48],
+	[11, 54, 24, 14, 55, 25],
+	[16, 45, 15, 14, 46, 16],
+
+	// 24
+	[6, 147, 117, 4, 148, 118],
+	[6, 73, 45, 14, 74, 46],
+	[11, 54, 24, 16, 55, 25],
+	[30, 46, 16, 2, 47, 17],
+
+	// 25
+	[8, 132, 106, 4, 133, 107],
+	[8, 75, 47, 13, 76, 48],
+	[7, 54, 24, 22, 55, 25],
+	[22, 45, 15, 13, 46, 16],
+
+	// 26
+	[10, 142, 114, 2, 143, 115],
+	[19, 74, 46, 4, 75, 47],
+	[28, 50, 22, 6, 51, 23],
+	[33, 46, 16, 4, 47, 17],
+
+	// 27
+	[8, 152, 122, 4, 153, 123],
+	[22, 73, 45, 3, 74, 46],
+	[8, 53, 23, 26, 54, 24],
+	[12, 45, 15, 28, 46, 16],
+
+	// 28
+	[3, 147, 117, 10, 148, 118],
+	[3, 73, 45, 23, 74, 46],
+	[4, 54, 24, 31, 55, 25],
+	[11, 45, 15, 31, 46, 16],
+
+	// 29
+	[7, 146, 116, 7, 147, 117],
+	[21, 73, 45, 7, 74, 46],
+	[1, 53, 23, 37, 54, 24],
+	[19, 45, 15, 26, 46, 16],
+
+	// 30
+	[5, 145, 115, 10, 146, 116],
+	[19, 75, 47, 10, 76, 48],
+	[15, 54, 24, 25, 55, 25],
+	[23, 45, 15, 25, 46, 16],
+
+	// 31
+	[13, 145, 115, 3, 146, 116],
+	[2, 74, 46, 29, 75, 47],
+	[42, 54, 24, 1, 55, 25],
+	[23, 45, 15, 28, 46, 16],
+
+	// 32
+	[17, 145, 115],
+	[10, 74, 46, 23, 75, 47],
+	[10, 54, 24, 35, 55, 25],
+	[19, 45, 15, 35, 46, 16],
+
+	// 33
+	[17, 145, 115, 1, 146, 116],
+	[14, 74, 46, 21, 75, 47],
+	[29, 54, 24, 19, 55, 25],
+	[11, 45, 15, 46, 46, 16],
+
+	// 34
+	[13, 145, 115, 6, 146, 116],
+	[14, 74, 46, 23, 75, 47],
+	[44, 54, 24, 7, 55, 25],
+	[59, 46, 16, 1, 47, 17],
+
+	// 35
+	[12, 151, 121, 7, 152, 122],
+	[12, 75, 47, 26, 76, 48],
+	[39, 54, 24, 14, 55, 25],
+	[22, 45, 15, 41, 46, 16],
+
+	// 36
+	[6, 151, 121, 14, 152, 122],
+	[6, 75, 47, 34, 76, 48],
+	[46, 54, 24, 10, 55, 25],
+	[2, 45, 15, 64, 46, 16],
+
+	// 37
+	[17, 152, 122, 4, 153, 123],
+	[29, 74, 46, 14, 75, 47],
+	[49, 54, 24, 10, 55, 25],
+	[24, 45, 15, 46, 46, 16],
+
+	// 38
+	[4, 152, 122, 18, 153, 123],
+	[13, 74, 46, 32, 75, 47],
+	[48, 54, 24, 14, 55, 25],
+	[42, 45, 15, 32, 46, 16],
+
+	// 39
+	[20, 147, 117, 4, 148, 118],
+	[40, 75, 47, 7, 76, 48],
+	[43, 54, 24, 22, 55, 25],
+	[10, 45, 15, 67, 46, 16],
+
+	// 40
+	[19, 148, 118, 6, 149, 119],
+	[18, 75, 47, 31, 76, 48],
+	[34, 54, 24, 34, 55, 25],
+	[20, 45, 15, 61, 46, 16]
+];
+
+QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+	
+	var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+	
+	if (rsBlock === undefined) {
+		throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+	}
+
+	var length = rsBlock.length / 3;
+	
+	var list = [];
+	
+	for (var i = 0; i < length; i++) {
+
+		var count = rsBlock[i * 3 + 0];
+		var totalCount = rsBlock[i * 3 + 1];
+		var dataCount  = rsBlock[i * 3 + 2];
+
+		for (var j = 0; j < count; j++) {
+			list.push(new QRRSBlock(totalCount, dataCount) );	
+		}
+	}
+	
+	return list;
+};
+
+QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+
+	switch(errorCorrectLevel) {
+	case QRErrorCorrectLevel.L :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+	case QRErrorCorrectLevel.M :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+	case QRErrorCorrectLevel.Q :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+	case QRErrorCorrectLevel.H :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+	default :
+		return undefined;
+	}
+};
+
+module.exports = QRRSBlock;
+
+};
+defs['QR8bitByte']=function(module,exports,require){
+var QRMode = require('./QRMode');
+
+function QR8bitByte(data) {
+	this.mode = QRMode.MODE_8BIT_BYTE;
+	this.data = data;
+}
+
+QR8bitByte.prototype = {
+
+	getLength : function() {
+		return this.data.length;
+	},
+	
+	write : function(buffer) {
+		for (var i = 0; i < this.data.length; i++) {
+			// not JIS ...
+			buffer.put(this.data.charCodeAt(i), 8);
+		}
+	}
+};
+
+module.exports = QR8bitByte;
+
+};
+defs['QRBitBuffer']=function(module,exports,require){
+function QRBitBuffer() {
+	this.buffer = [];
+	this.length = 0;
+}
+
+QRBitBuffer.prototype = {
+
+	get : function(index) {
+		var bufIndex = Math.floor(index / 8);
+		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+	},
+	
+	put : function(num, length) {
+		for (var i = 0; i < length; i++) {
+			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+		}
+	},
+	
+	getLengthInBits : function() {
+		return this.length;
+	},
+	
+	putBit : function(bit) {
+	
+		var bufIndex = Math.floor(this.length / 8);
+		if (this.buffer.length <= bufIndex) {
+			this.buffer.push(0);
+		}
+	
+		if (bit) {
+			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+		}
+	
+		this.length++;
+	}
+};
+
+module.exports = QRBitBuffer;
+
+};
+defs['index']=function(module,exports,require){
+//---------------------------------------------------------------------
+// QRCode for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//   http://www.opensource.org/licenses/mit-license.php
+//
+// The word "QR Code" is registered trademark of 
+// DENSO WAVE INCORPORATED
+//   http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+// Modified to work in node for this project (and some refactoring)
+//---------------------------------------------------------------------
+
+var QR8bitByte = require('./QR8bitByte');
+var QRUtil = require('./QRUtil');
+var QRPolynomial = require('./QRPolynomial');
+var QRRSBlock = require('./QRRSBlock');
+var QRBitBuffer = require('./QRBitBuffer');
+
+function QRCode(typeNumber, errorCorrectLevel) {
+	this.typeNumber = typeNumber;
+	this.errorCorrectLevel = errorCorrectLevel;
+	this.modules = null;
+	this.moduleCount = 0;
+	this.dataCache = null;
+	this.dataList = [];
+}
+
+QRCode.prototype = {
+	
+	addData : function(data) {
+		var newData = new QR8bitByte(data);
+		this.dataList.push(newData);
+		this.dataCache = null;
+	},
+	
+	isDark : function(row, col) {
+		if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+			throw new Error(row + "," + col);
+		}
+		return this.modules[row][col];
+	},
+
+	getModuleCount : function() {
+		return this.moduleCount;
+	},
+	
+	make : function() {
+		// Calculate automatically typeNumber if provided is < 1
+		if (this.typeNumber < 1 ){
+			var typeNumber = 1;
+			for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+				var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+
+				var buffer = new QRBitBuffer();
+				var totalDataCount = 0;
+				for (var i = 0; i < rsBlocks.length; i++) {
+					totalDataCount += rsBlocks[i].dataCount;
+				}
+
+				for (var x = 0; x < this.dataList.length; x++) {
+					var data = this.dataList[x];
+					buffer.put(data.mode, 4);
+					buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+					data.write(buffer);
+				}
+				if (buffer.getLengthInBits() <= totalDataCount * 8)
+					break;
+			}
+			this.typeNumber = typeNumber;
+		}
+		this.makeImpl(false, this.getBestMaskPattern() );
+	},
+	
+	makeImpl : function(test, maskPattern) {
+		
+		this.moduleCount = this.typeNumber * 4 + 17;
+		this.modules = new Array(this.moduleCount);
+		
+		for (var row = 0; row < this.moduleCount; row++) {
+			
+			this.modules[row] = new Array(this.moduleCount);
+			
+			for (var col = 0; col < this.moduleCount; col++) {
+				this.modules[row][col] = null;//(col + row) % 3;
+			}
+		}
+	
+		this.setupPositionProbePattern(0, 0);
+		this.setupPositionProbePattern(this.moduleCount - 7, 0);
+		this.setupPositionProbePattern(0, this.moduleCount - 7);
+		this.setupPositionAdjustPattern();
+		this.setupTimingPattern();
+		this.setupTypeInfo(test, maskPattern);
+		
+		if (this.typeNumber >= 7) {
+			this.setupTypeNumber(test);
+		}
+	
+		if (this.dataCache === null) {
+			this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+		}
+	
+		this.mapData(this.dataCache, maskPattern);
+	},
+
+	setupPositionProbePattern : function(row, col)  {
+		
+		for (var r = -1; r <= 7; r++) {
+			
+			if (row + r <= -1 || this.moduleCount <= row + r) continue;
+			
+			for (var c = -1; c <= 7; c++) {
+				
+				if (col + c <= -1 || this.moduleCount <= col + c) continue;
+				
+				if ( (0 <= r && r <= 6 && (c === 0 || c === 6) ) || 
+                     (0 <= c && c <= 6 && (r === 0 || r === 6) ) || 
+                     (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+					this.modules[row + r][col + c] = true;
+				} else {
+					this.modules[row + r][col + c] = false;
+				}
+			}		
+		}		
+	},
+	
+	getBestMaskPattern : function() {
+	
+		var minLostPoint = 0;
+		var pattern = 0;
+	
+		for (var i = 0; i < 8; i++) {
+			
+			this.makeImpl(true, i);
+	
+			var lostPoint = QRUtil.getLostPoint(this);
+	
+			if (i === 0 || minLostPoint >  lostPoint) {
+				minLostPoint = lostPoint;
+				pattern = i;
+			}
+		}
+	
+		return pattern;
+	},
+	
+	createMovieClip : function(target_mc, instance_name, depth) {
+	
+		var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
+		var cs = 1;
+	
+		this.make();
+
+		for (var row = 0; row < this.modules.length; row++) {
+			
+			var y = row * cs;
+			
+			for (var col = 0; col < this.modules[row].length; col++) {
+	
+				var x = col * cs;
+				var dark = this.modules[row][col];
+			
+				if (dark) {
+					qr_mc.beginFill(0, 100);
+					qr_mc.moveTo(x, y);
+					qr_mc.lineTo(x + cs, y);
+					qr_mc.lineTo(x + cs, y + cs);
+					qr_mc.lineTo(x, y + cs);
+					qr_mc.endFill();
+				}
+			}
+		}
+		
+		return qr_mc;
+	},
+
+	setupTimingPattern : function() {
+		
+		for (var r = 8; r < this.moduleCount - 8; r++) {
+			if (this.modules[r][6] !== null) {
+				continue;
+			}
+			this.modules[r][6] = (r % 2 === 0);
+		}
+	
+		for (var c = 8; c < this.moduleCount - 8; c++) {
+			if (this.modules[6][c] !== null) {
+				continue;
+			}
+			this.modules[6][c] = (c % 2 === 0);
+		}
+	},
+	
+	setupPositionAdjustPattern : function() {
+	
+		var pos = QRUtil.getPatternPosition(this.typeNumber);
+		
+		for (var i = 0; i < pos.length; i++) {
+		
+			for (var j = 0; j < pos.length; j++) {
+			
+				var row = pos[i];
+				var col = pos[j];
+				
+				if (this.modules[row][col] !== null) {
+					continue;
+				}
+				
+				for (var r = -2; r <= 2; r++) {
+				
+					for (var c = -2; c <= 2; c++) {
+					
+						if (Math.abs(r) === 2 || 
+                            Math.abs(c) === 2 ||
+                            (r === 0 && c === 0) ) {
+							this.modules[row + r][col + c] = true;
+						} else {
+							this.modules[row + r][col + c] = false;
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	setupTypeNumber : function(test) {
+	
+		var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+        var mod;
+	
+		for (var i = 0; i < 18; i++) {
+			mod = (!test && ( (bits >> i) & 1) === 1);
+			this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+		}
+	
+		for (var x = 0; x < 18; x++) {
+			mod = (!test && ( (bits >> x) & 1) === 1);
+			this.modules[x % 3 + this.moduleCount - 8 - 3][Math.floor(x / 3)] = mod;
+		}
+	},
+	
+	setupTypeInfo : function(test, maskPattern) {
+	
+		var data = (this.errorCorrectLevel << 3) | maskPattern;
+		var bits = QRUtil.getBCHTypeInfo(data);
+        var mod;
+	
+		// vertical		
+		for (var v = 0; v < 15; v++) {
+	
+			mod = (!test && ( (bits >> v) & 1) === 1);
+	
+			if (v < 6) {
+				this.modules[v][8] = mod;
+			} else if (v < 8) {
+				this.modules[v + 1][8] = mod;
+			} else {
+				this.modules[this.moduleCount - 15 + v][8] = mod;
+			}
+		}
+	
+		// horizontal
+		for (var h = 0; h < 15; h++) {
+	
+			mod = (!test && ( (bits >> h) & 1) === 1);
+			
+			if (h < 8) {
+				this.modules[8][this.moduleCount - h - 1] = mod;
+			} else if (h < 9) {
+				this.modules[8][15 - h - 1 + 1] = mod;
+			} else {
+				this.modules[8][15 - h - 1] = mod;
+			}
+		}
+	
+		// fixed module
+		this.modules[this.moduleCount - 8][8] = (!test);
+	
+	},
+	
+	mapData : function(data, maskPattern) {
+		
+		var inc = -1;
+		var row = this.moduleCount - 1;
+		var bitIndex = 7;
+		var byteIndex = 0;
+		
+		for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+	
+			if (col === 6) col--;
+	
+			while (true) {
+	
+				for (var c = 0; c < 2; c++) {
+					
+					if (this.modules[row][col - c] === null) {
+						
+						var dark = false;
+	
+						if (byteIndex < data.length) {
+							dark = ( ( (data[byteIndex] >>> bitIndex) & 1) === 1);
+						}
+	
+						var mask = QRUtil.getMask(maskPattern, row, col - c);
+	
+						if (mask) {
+							dark = !dark;
+						}
+						
+						this.modules[row][col - c] = dark;
+						bitIndex--;
+	
+						if (bitIndex === -1) {
+							byteIndex++;
+							bitIndex = 7;
+						}
+					}
+				}
+								
+				row += inc;
+	
+				if (row < 0 || this.moduleCount <= row) {
+					row -= inc;
+					inc = -inc;
+					break;
+				}
+			}
+		}
+		
+	}
+
+};
+
+QRCode.PAD0 = 0xEC;
+QRCode.PAD1 = 0x11;
+
+QRCode.createData = function(typeNumber, errorCorrectLevel, dataList) {
+	
+	var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+	
+	var buffer = new QRBitBuffer();
+	
+	for (var i = 0; i < dataList.length; i++) {
+		var data = dataList[i];
+		buffer.put(data.mode, 4);
+		buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+		data.write(buffer);
+	}
+
+	// calc num max data.
+	var totalDataCount = 0;
+	for (var x = 0; x < rsBlocks.length; x++) {
+		totalDataCount += rsBlocks[x].dataCount;
+	}
+
+	if (buffer.getLengthInBits() > totalDataCount * 8) {
+		throw new Error("code length overflow. (" + 
+            buffer.getLengthInBits() + 
+            ">" +  
+            totalDataCount * 8 + 
+            ")");
+	}
+
+	// end code
+	if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+		buffer.put(0, 4);
+	}
+
+	// padding
+	while (buffer.getLengthInBits() % 8 !== 0) {
+		buffer.putBit(false);
+	}
+
+	// padding
+	while (true) {
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD0, 8);
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD1, 8);
+	}
+
+	return QRCode.createBytes(buffer, rsBlocks);
+};
+
+QRCode.createBytes = function(buffer, rsBlocks) {
+
+	var offset = 0;
+	
+	var maxDcCount = 0;
+	var maxEcCount = 0;
+	
+	var dcdata = new Array(rsBlocks.length);
+	var ecdata = new Array(rsBlocks.length);
+	
+	for (var r = 0; r < rsBlocks.length; r++) {
+
+		var dcCount = rsBlocks[r].dataCount;
+		var ecCount = rsBlocks[r].totalCount - dcCount;
+
+		maxDcCount = Math.max(maxDcCount, dcCount);
+		maxEcCount = Math.max(maxEcCount, ecCount);
+		
+		dcdata[r] = new Array(dcCount);
+		
+		for (var i = 0; i < dcdata[r].length; i++) {
+			dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+		}
+		offset += dcCount;
+		
+		var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+		var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+		var modPoly = rawPoly.mod(rsPoly);
+		ecdata[r] = new Array(rsPoly.getLength() - 1);
+		for (var x = 0; x < ecdata[r].length; x++) {
+            var modIndex = x + modPoly.getLength() - ecdata[r].length;
+			ecdata[r][x] = (modIndex >= 0)? modPoly.get(modIndex) : 0;
+		}
+
+	}
+	
+	var totalCodeCount = 0;
+	for (var y = 0; y < rsBlocks.length; y++) {
+		totalCodeCount += rsBlocks[y].totalCount;
+	}
+
+	var data = new Array(totalCodeCount);
+	var index = 0;
+
+	for (var z = 0; z < maxDcCount; z++) {
+		for (var s = 0; s < rsBlocks.length; s++) {
+			if (z < dcdata[s].length) {
+				data[index++] = dcdata[s][z];
+			}
+		}
+	}
+
+	for (var xx = 0; xx < maxEcCount; xx++) {
+		for (var t = 0; t < rsBlocks.length; t++) {
+			if (xx < ecdata[t].length) {
+				data[index++] = ecdata[t][xx];
+			}
+		}
+	}
+
+	return data;
+
+};
+
+module.exports = QRCode;
+
+};
+return {make:function(text){var q=new (req('index'))(-1,req('QRErrorCorrectLevel').M);q.addData(text);q.make();return q;}};})();
+</script>
+<script>
+(function () {
+'use strict';
+const CFG = window.APP_CONFIG;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const CUR = CFG.currency || 'OMR';
+const fmt = n => Number(n || 0).toFixed(3);
+const METHODS = ['Cash','Card','Bank transfer','Mobile payment'];
+const ALPHA = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+const CODE_RE = /^[A-Z2-9]{10}$/;
+const digits = s => String(s || '').replace(/\D/g, '');
+const timeStr = t => t ? new Date(t).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
+const dateTimeStr = t => t ? new Date(t).toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
+const clean = o => { const r = {}; for (const k in o) if (o[k] !== undefined) r[k] = o[k]; return r; };
+const lsGet = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (e) { return d; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+
+/* ---------- ticket codes ---------- */
+function newCode() {
+  const b = new Uint8Array(10); crypto.getRandomValues(b);
+  return Array.from(b, x => ALPHA[x % 32]).join('');
+}
+const fmtCode = c => c ? c.slice(0, 5) + '-' + c.slice(5) : '';
+function parseCode(raw) {
+  let s = String(raw || '').trim();
+  const m = s.match(/[#&?](?:t-|t=|my=)([A-Za-z0-9]{10})(?![A-Za-z0-9])/);
+  if (m) return m[1].toUpperCase();
+  s = s.toUpperCase().replace(/^GBID:/, '').replace(/[\s-]/g, '');
+  return CODE_RE.test(s) ? s : null;
+}
+const siteBase = () => (CFG.siteUrl || location.href).split('#')[0];
+const ticketUrl = code => siteBase() + '#t-' + code;
+const personalLink = g => siteBase() + '#my=' + g.code + '&n=' + encodeURIComponent(g.name || '') + '&g=' + (+g.heads || 1);
+function qrSvg(code) {
+  const q = QRLib.make(ticketUrl(code)), n = q.getModuleCount(); let d = '';
+  for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) d += `M${c + 4} ${r + 4}h1v1h-1z`;
+  return `<svg viewBox="0 0 ${n + 8} ${n + 8}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ticket QR code"><rect width="${n + 8}" height="${n + 8}" fill="#FFFFFF"/><path d="${d}" fill="#000000" shape-rendering="crispEdges"/></svg>`;
+}
+
+/* ============================================================
+   DATA LAYER: Firebase (shared) or Demo (this device only)
+   ============================================================ */
+async function makeFirebaseStore(cfg) {
+  const B = 'https://www.gstatic.com/firebasejs/10.14.1/';
+  const [appM, authM, fs] = await Promise.all([import(B + 'firebase-app.js'), import(B + 'firebase-auth.js'), import(B + 'firebase-firestore.js')]);
+  const app = appM.initializeApp(cfg), auth = authM.getAuth(app);
+  const db = fs.initializeFirestore(app, { experimentalAutoDetectLongPolling: true });
+  const gref = c => fs.doc(db, 'guests', c);
+  return {
+    mode: 'firebase',
+    onUser(cb) { return authM.onAuthStateChanged(auth, u => cb(u ? { email: (u.email || '').toLowerCase() } : null)); },
+    login: (e, p) => authM.signInWithEmailAndPassword(auth, e, p),
+    logout: () => authM.signOut(auth),
+    watch(kind, cb, err) {
+      if (kind === 'config') return fs.onSnapshot(fs.doc(db, 'config', 'event'), s => cb(s.exists() ? s.data() : {}), err);
+      if (kind === 'guests') return fs.onSnapshot(fs.collection(db, 'guests'), s => cb(s.docs.map(d => ({ ...d.data(), code: d.id }))), err);
+      return fs.onSnapshot(fs.query(fs.collection(db, 'scans'), fs.orderBy('t', 'desc'), fs.limit(300)), s => cb(s.docs.map(d => ({ ...d.data(), id: d.id }))), err);
+    },
+    setConfig: o => fs.setDoc(fs.doc(db, 'config', 'event'), clean(o)),
+    async getGuest(code) { const s = await fs.getDoc(gref(code)); return s.exists() ? { ...s.data(), code } : null; },
+    async createGuest(data) {
+      for (let i = 0; i < 6; i++) {
+        const code = newCode();
+        const ok = await fs.runTransaction(db, async tx => {
+          if ((await tx.get(gref(code))).exists()) return false;
+          tx.set(gref(code), clean({ ...data, code }));
+          return true;
+        });
+        if (ok) return code;
+      }
+      throw new Error('Could not create a unique ticket code. Try again.');
+    },
+    updateGuest: (code, patch) => fs.updateDoc(gref(code), clean(patch)),
+    deleteGuest: code => fs.deleteDoc(gref(code)),
+    async bulkUpdate(list) {
+      for (let i = 0; i < list.length; i += 400) {
+        const b = fs.writeBatch(db);
+        list.slice(i, i + 400).forEach(x => b.update(gref(x.code), clean(x.patch)));
+        await b.commit();
+      }
+    },
+    checkIn(code, want, by) {
+      return fs.runTransaction(db, async tx => {
+        const ref = gref(code), s = await tx.get(ref);
+        if (!s.exists()) return { result: 'notfound' };
+        const g = { ...s.data(), code };
+        if (g.status === 'revoked') return { result: 'revoked', guest: g };
+        if (!g.paidFull) return { result: 'unpaid', guest: g };
+        const rem = (+g.heads || 0) - (+g.arrived || 0);
+        if (rem <= 0) return { result: 'used', guest: g };
+        const n = Math.min(Math.max(1, want || rem), rem), now = Date.now();
+        tx.update(ref, { arrived: (+g.arrived || 0) + n, arrivedAt: now, lastBy: by, lastN: n });
+        return { result: 'ok', n, guest: { ...g, arrived: (+g.arrived || 0) + n, arrivedAt: now, lastBy: by, lastN: n } };
+      });
+    },
+    async reissue(code, by) {
+      for (let i = 0; i < 6; i++) {
+        const nc = newCode();
+        const res = await fs.runTransaction(db, async tx => {
+          const os = await tx.get(gref(code));
+          if (!os.exists()) throw new Error('Ticket not found');
+          const o = os.data();
+          if (o.status === 'revoked') throw new Error('This ticket is already cancelled');
+          if ((await tx.get(gref(nc))).exists()) return null;
+          tx.set(gref(nc), clean({ ...o, code: nc, status: 'active', replacedBy: null, reissuedFrom: code, createdAt: Date.now(), createdBy: by }));
+          tx.update(gref(code), { status: 'revoked', replacedBy: nc, revokedAt: Date.now(), revokedBy: by });
+          return nc;
+        });
+        if (res) return res;
+      }
+      throw new Error('Could not create a unique ticket code. Try again.');
+    },
+    logScan: e => fs.addDoc(fs.collection(db, 'scans'), clean(e))
+  };
+}
+
+function makeDemoStore() {
+  const KEY = 'gbid-demo-v2';
+  const fresh = () => ({ cfg: {}, guests: {}, scans: [] });
+  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || fresh(); } catch (e) { return fresh(); } };
+  let db = load(), userCb = null;
+  const L = { config: new Set(), guests: new Set(), scans: new Set() };
+  const guestsArr = () => Object.values(db.guests).map(g => ({ ...g }));
+  const emit = () => { L.config.forEach(f => f({ ...db.cfg })); L.guests.forEach(f => f(guestsArr())); L.scans.forEach(f => f(db.scans.slice().reverse().slice(0, 300))); };
+  const save = () => { lsSet(KEY, JSON.stringify(db)); emit(); };
+  window.addEventListener('storage', e => { if (e.key === KEY) { db = load(); emit(); } });
+  const sess = () => { try { return JSON.parse(sessionStorage.getItem('gbid-demo-user')); } catch (e) { return null; } };
+  return {
+    mode: 'demo',
+    onUser(cb) { userCb = cb; setTimeout(() => cb(sess()), 0); return () => {}; },
+    demoLogin(role) { const u = { email: role + '@demo.local', demoRole: role }; try { sessionStorage.setItem('gbid-demo-user', JSON.stringify(u)); } catch (e) {} userCb && userCb(u); },
+    logout: async () => { try { sessionStorage.removeItem('gbid-demo-user'); } catch (e) {} userCb && userCb(null); },
+    watch(kind, cb) { const set = L[kind]; set.add(cb); setTimeout(emit, 0); return () => set.delete(cb); },
+    async setConfig(o) { db.cfg = clean(o); save(); },
+    async getGuest(code) { const g = db.guests[code]; return g ? { ...g } : null; },
+    async createGuest(data) {
+      let code; do { code = newCode(); } while (db.guests[code]);
+      db.guests[code] = clean({ ...data, code }); save(); return code;
+    },
+    async updateGuest(code, patch) { if (!db.guests[code]) throw new Error('Guest not found'); Object.assign(db.guests[code], clean(patch)); save(); },
+    async deleteGuest(code) { delete db.guests[code]; save(); },
+    async bulkUpdate(list) { list.forEach(x => db.guests[x.code] && Object.assign(db.guests[x.code], clean(x.patch))); save(); },
+    async checkIn(code, want, by) {
+      db = load();
+      const g0 = db.guests[code];
+      if (!g0) return { result: 'notfound' };
+      const g = { ...g0 };
+      if (g.status === 'revoked') return { result: 'revoked', guest: g };
+      if (!g.paidFull) return { result: 'unpaid', guest: g };
+      const rem = (+g.heads || 0) - (+g.arrived || 0);
+      if (rem <= 0) return { result: 'used', guest: g };
+      const n = Math.min(Math.max(1, want || rem), rem), now = Date.now();
+      Object.assign(g0, { arrived: (+g.arrived || 0) + n, arrivedAt: now, lastBy: by, lastN: n }); save();
+      return { result: 'ok', n, guest: { ...g0 } };
+    },
+    async reissue(code, by) {
+      const o = db.guests[code];
+      if (!o) throw new Error('Ticket not found');
+      if (o.status === 'revoked') throw new Error('This ticket is already cancelled');
+      let nc; do { nc = newCode(); } while (db.guests[nc]);
+      db.guests[nc] = { ...o, code: nc, status: 'active', replacedBy: null, reissuedFrom: code, createdAt: Date.now(), createdBy: by };
+      Object.assign(o, { status: 'revoked', replacedBy: nc, revokedAt: Date.now(), revokedBy: by });
+      save(); return nc;
+    },
+    async logScan(e) { db.scans.push({ ...clean(e), id: String(Date.now()) + Math.random().toString(36).slice(2, 6) }); if (db.scans.length > 1000) db.scans.shift(); save(); },
+    clearAll() { db = fresh(); save(); }
+  };
+}
+
+/* ============================================================
+   STATE AND HELPERS
+   ============================================================ */
+let Store = null;
+const DEFAULT_PRICE = (CFG.pricePerHead != null && !isNaN(+CFG.pricePerHead)) ? +CFG.pricePerHead : null;
+const S = { user: null, admin: false, cfg: { price: DEFAULT_PRICE, date: '' }, guests: [], scans: [], loaded: false, conn: 'Connecting',
+  tab: 'scan', filter: 'all', logFilter: 'all', openId: null, verdict: null, auto: lsGet('gbid-auto', '1') === '1', pending: null, handling: false };
+const ui = {};            // per-guest door state {n, method}
+let overlayState = {}, unsubs = [];
+
+const priced = () => S.cfg.price != null && !isNaN(S.cfg.price);
+const live = () => S.guests.filter(g => g.status !== 'revoked');
+const byCode = c => S.guests.find(g => g.code === c);
+const dueOf = g => (g.due != null && +g.due > 0) ? +g.due : (priced() ? (+g.heads || 0) * S.cfg.price : 0);
+const paidOf = g => +g.paid || 0;
+const balOf = g => Math.max(0, dueOf(g) - paidOf(g));
+const inOf = g => +g.arrived || 0;
+const remOf = g => Math.max(0, (+g.heads || 0) - inOf(g));
+const isPaid = g => !!g.paidFull;
+const payState = g => g.paidFull ? 'paid' : (paidOf(g) > 0 ? 'partial' : 'unpaid');
+function calcPay(heads, paid) {
+  const due = priced() ? heads * S.cfg.price : 0;
+  return { due, paidFull: priced() && paid > 0 && paid >= due - 0.0005 };
+}
+const setHTML = (el, h) => { if (el._h !== h) { el.innerHTML = h; el._h = h; } };
+let toastT;
+function toast(msg, err) {
+  const t = $('#toast'); t.textContent = msg; t.className = 'toast' + (err ? ' err' : ''); t.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 3200);
+}
+const errMsg = e => (e && (e.message || e.code)) || 'unknown error';
+const niceErr = e => {
+  const c = e && e.code || '';
+  if (c.includes('permission-denied')) return 'Not allowed for your account.';
+  if (c.includes('unavailable') || c.includes('network')) return 'No connection. Check the internet and try again.';
+  return errMsg(e);
+};
+
+/* ---------- audio / vibration feedback ---------- */
+let actx;
+function feedback(kind) {
+  try { navigator.vibrate && navigator.vibrate(kind === 'ok' ? 60 : [120, 60, 120]); } catch (e) {}
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const o = actx.createOscillator(), g = actx.createGain(), t = actx.currentTime;
+    o.connect(g); g.connect(actx.destination);
+    if (kind === 'ok') { o.type = 'sine'; o.frequency.setValueAtTime(880, t); o.frequency.setValueAtTime(1320, t + .09); g.gain.setValueAtTime(.18, t); o.start(t); o.stop(t + .2); }
+    else if (kind === 'warn') { o.type = 'triangle'; o.frequency.setValueAtTime(560, t); g.gain.setValueAtTime(.2, t); o.start(t); o.stop(t + .25); }
+    else { o.type = 'square'; o.frequency.setValueAtTime(200, t); o.frequency.setValueAtTime(150, t + .18); g.gain.setValueAtTime(.15, t); o.start(t); o.stop(t + .4); }
+  } catch (e) {}
+  const cam = $('#cam'); cam.classList.remove('f-ok', 'f-warn', 'f-bad'); cam.classList.add('f-' + kind);
+  setTimeout(() => cam.classList.remove('f-ok', 'f-warn', 'f-bad'), 1000);
+}
+
+/* ============================================================
+   JUDGING A TICKET
+   ============================================================ */
+function judge(g) {
+  if (!g) return { kind: 'bad', res: 'notfound', title: 'Ticket not recognised', detail: 'This code is not on the guest list. Do not admit. Check the code or search by name.' };
+  if (g.status === 'revoked') return { kind: 'bad', res: 'revoked', title: 'Ticket cancelled', detail: `${g.name}: this ticket was ${g.replacedBy ? 'replaced by a newer one' : 'cancelled'}. Do not admit.` };
+  const tot = +g.heads || 0, rem = remOf(g);
+  if (rem <= 0) return { kind: 'bad', res: 'duplicate', title: 'Already used', detail: `${g.name}: all ${tot} ${tot === 1 ? 'guest has' : 'guests have'} entered${g.arrivedAt ? ' (last entry ' + timeStr(g.arrivedAt) + (g.lastBy ? ' by ' + g.lastBy : '') + ')' : ''}.` };
+  if (!isPaid(g)) { const b = balOf(g) || dueOf(g); return { kind: 'warn', res: 'unpaid', title: 'Payment due', detail: `${g.name}: ${b > 0 ? fmt(b) + ' ' + CUR + ' to collect.' : 'not paid yet.'} ${S.admin ? 'Collect payment below before entry.' : 'Send the guest to the admin desk.'}` }; }
+  return { kind: 'ok', res: 'verified', title: 'Valid ticket', detail: `${g.name}: ${rem} of ${tot} ${tot === 1 ? 'guest' : 'guests'} may enter${rem < tot ? ` (${tot - rem} already in)` : ''}.` };
+}
+function judgeResult(r) {
+  if (r.result === 'ok') { const g = r.guest, rem = remOf(g); return { kind: 'ok', res: 'admitted', title: 'Admitted', detail: `${g.name}: ${r.n} ${r.n === 1 ? 'guest' : 'guests'} admitted${rem > 0 ? `, ${rem} still to come` : ''}.` }; }
+  const j = judge(r.result === 'notfound' ? null : r.guest);
+  if (r.result === 'used') j.res = 'duplicate';
+  return j;
+}
+function logScan(code, g, res, n) {
+  if (!Store || !S.user) return;
+  Promise.resolve(Store.logScan({ t: Date.now(), code: String(code || '').slice(0, 40), name: (g && g.name) || '', result: res, n: n || 0, by: S.user.email })).catch(() => {});
+}
+function setVerdict(v) { S.verdict = v; renderScan(); const el = $('#verdict'); if (v && el.scrollIntoView) { try { el.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (e) {} } }
+
+async function handleCode(raw) {
+  if (S.handling) return; S.handling = true;
+  try {
+    const code = parseCode(raw);
+    $('#q').value = '';
+    if (!code) { setVerdict({ kind: 'bad', title: 'Not a ticket QR code', detail: 'This QR code does not belong to this event.' }); S.openId = null; feedback('bad'); logScan(String(raw).slice(0, 30), null, 'notfound', 0); return; }
+    let g = byCode(code);
+    if (!g) { try { g = await Store.getGuest(code); } catch (e) {} }
+    const j = judge(g);
+    S.openId = g ? code : null;
+    if (g && j.kind === 'ok' && S.auto) { await admit(code, remOf(g), true); return; }
+    setVerdict({ ...j, code }); feedback(j.kind); logScan(code, g, j.res, 0);
+  } finally { S.handling = false; }
+}
+
+async function admit(code, n, viaScan) {
+  try {
+    const r = await Store.checkIn(code, n, S.user.email);
+    const j = judgeResult(r);
+    S.openId = r.result === 'notfound' ? null : code;
+    delete ui[code];
+    setVerdict({ ...j, code }); feedback(j.kind);
+    logScan(code, r.guest, j.res, r.n || 0);
+    if (!viaScan && r.result === 'ok') { const q = $('#q'); q.value = ''; }
+  } catch (e) { toast('Could not admit: ' + niceErr(e), true); }
+}
+
+/* ============================================================
+   CAMERA SCANNER
+   ============================================================ */
+const cam = { stream: null, running: false, facing: 'environment', det: null, busy: false, last: { key: '', t: 0 }, raf: 0, lastTick: 0, canvas: document.createElement('canvas'), torch: false };
+let jsqrP = null;
+function loadJsQR() {
+  if (window.jsQR) return Promise.resolve(true);
+  if (jsqrP) return jsqrP;
+  const urls = ['https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js', 'https://unpkg.com/jsqr@1.4.0/dist/jsQR.js', 'https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js'];
+  jsqrP = (async () => {
+    for (const u of urls) {
+      const ok = await new Promise(res => { const s = document.createElement('script'); s.src = u; s.onload = () => res(true); s.onerror = () => res(false); document.head.appendChild(s); });
+      if (ok && window.jsQR) return true;
+    }
+    jsqrP = null; return false;
+  })();
+  return jsqrP;
+}
+function camNote(t) { $('#camnote').textContent = t || ''; }
+async function camStart() {
+  if (cam.running) return;
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { camNote(window.isSecureContext ? 'This browser cannot open the camera. Use Scan from photo, or type the ticket code.' : 'The camera needs a secure (https) address. Open the GitHub Pages link, not a local file.'); return; }
+  try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); if (actx.state === 'suspended') actx.resume(); } catch (e) {}
+  try {
+    cam.stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: cam.facing }, width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false });
+  } catch (e) {
+    camNote(e && e.name === 'NotAllowedError' ? 'Camera permission is blocked. Allow the camera for this site in the browser settings, then tap Start again.' : (e && e.name === 'NotFoundError' ? 'No camera found on this device.' : 'Could not start the camera: ' + errMsg(e)));
+    return;
+  }
+  const v = $('#vid'); v.srcObject = cam.stream;
+  try { await v.play(); } catch (e) {}
+  cam.running = true; camNote('');
+  $('#cam').hidden = false; $('#camstart').hidden = true;
+  cam.det = null;
+  if ('BarcodeDetector' in window) { try { cam.det = new BarcodeDetector({ formats: ['qr_code'] }); } catch (e) { cam.det = null; } }
+  if (!cam.det) { const ok = await loadJsQR(); if (!ok) camNote('The QR reader could not load. Check the internet connection, or use Scan from photo.'); }
+  const tr = cam.stream.getVideoTracks()[0], caps = tr && tr.getCapabilities ? tr.getCapabilities() : {};
+  $('#torchbtn').hidden = !caps.torch; cam.torch = false;
+  cam.raf = requestAnimationFrame(camTick);
+}
+function camStop() {
+  cam.running = false; cancelAnimationFrame(cam.raf);
+  if (cam.stream) cam.stream.getTracks().forEach(t => t.stop());
+  cam.stream = null; const v = $('#vid'); v.srcObject = null;
+  $('#cam').hidden = true; $('#camstart').hidden = false;
+}
+function camTick(ts) {
+  if (!cam.running) return;
+  cam.raf = requestAnimationFrame(camTick);
+  const v = $('#vid');
+  if (ts - cam.lastTick < 110 || cam.busy || v.readyState < 2) return;
+  cam.lastTick = ts; cam.busy = true;
+  scanFrame(v).then(text => { if (text) onDecoded(text); }).catch(() => {}).finally(() => { cam.busy = false; });
+}
+async function scanFrame(v) {
+  if (cam.det) { const r = await cam.det.detect(v); return r && r.length ? r[0].rawValue : null; }
+  if (!window.jsQR) return null;
+  const w0 = v.videoWidth, h0 = v.videoHeight; if (!w0 || !h0) return null;
+  const s = Math.min(1, 640 / Math.max(w0, h0)), w = Math.round(w0 * s), h = Math.round(h0 * s);
+  cam.canvas.width = w; cam.canvas.height = h;
+  const cx = cam.canvas.getContext('2d', { willReadFrequently: true }); cx.drawImage(v, 0, 0, w, h);
+  const r = window.jsQR(cx.getImageData(0, 0, w, h).data, w, h, { inversionAttempts: 'dontInvert' });
+  return r && r.data ? r.data : null;
+}
+function onDecoded(text) {
+  const key = parseCode(text) || String(text).slice(0, 40), now = Date.now();
+  if (cam.last.key === key && now - cam.last.t < 4000) { cam.last.t = now; return; }   // same QR still in view
+  cam.last = { key, t: now };
+  handleCode(text);
+}
+async function decodePhoto(file) {
+  const bmp = await createImageBitmap(file);
+  if ('BarcodeDetector' in window) { try { const r = await new BarcodeDetector({ formats: ['qr_code'] }).detect(bmp); if (r && r.length) return r[0].rawValue; } catch (e) {} }
+  if (!(await loadJsQR())) throw new Error('The QR reader could not load. Check the internet connection.');
+  for (const max of [1000, 1600, 600]) {
+    const s = Math.min(1, max / Math.max(bmp.width, bmp.height)), w = Math.round(bmp.width * s), h = Math.round(bmp.height * s);
+    const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+    const cx = cv.getContext('2d', { willReadFrequently: true }); cx.drawImage(bmp, 0, 0, w, h);
+    const r = window.jsQR(cx.getImageData(0, 0, w, h).data, w, h, { inversionAttempts: 'attemptBoth' });
+    if (r && r.data) return r.data;
+  }
+  return null;
+}
+
+/* ============================================================
+   RENDERING
+   ============================================================ */
+function payPill(g) {
+  const s = payState(g);
+  if (s === 'paid') return '<span class="pill ok">Paid</span>' + (g.sponsor ? '<span class="pill info">Sponsor</span>' : '');
+  if (s === 'partial') return `<span class="pill warn">Balance ${fmt(balOf(g))}</span>`;
+  return priced() ? `<span class="pill bad">Unpaid ${fmt(dueOf(g))}</span>` : '<span class="pill bad">Unpaid</span>';
+}
+function inPill(g) {
+  if (g.status === 'revoked') return '<span class="pill bad">Cancelled</span>';
+  const n = inOf(g), h = +g.heads || 0;
+  if (h > 0 && n >= h) return '<span class="pill done">Arrived</span>';
+  if (n > 0) return `<span class="pill info">${n} of ${h} in</span>`;
+  return '';
+}
+const metaOf = g => [g.phone, `${g.heads || 0} ${(+g.heads === 1) ? 'guest' : 'guests'}`, g.type === 'walkin' ? 'Walk-in' : 'Pre-booked'].filter(Boolean).map(esc).join(' · ');
+
+function renderHeader() {
+  $('#h-title').textContent = CFG.eventName;
+  $('#evsub').innerHTML = [CFG.featuring, CFG.tagline, CFG.venue, S.cfg.date].filter(Boolean).map(esc).join(' · ');
+  $('#h-role').textContent = S.admin ? 'Admin' : 'Gate staff';
+  $('#live').className = 'live' + (S.conn === 'Live' ? ' on' : '');
+  $('#livetxt').textContent = S.conn;
+}
+function renderStats() {
+  const L = live(), heads = L.reduce((a, g) => a + (+g.heads || 0), 0), inn = L.reduce((a, g) => a + inOf(g), 0);
+  const col = L.reduce((a, g) => a + paidOf(g), 0), due = L.reduce((a, g) => a + balOf(g), 0);
+  const st = $('#strip');
+  st.className = 'strip ' + (S.admin ? 's3' : 's2');
+  setHTML(st, S.admin
+    ? `<div class="stat"><b>${inn} / ${heads}</b><span>Guests in</span></div><div class="stat"><b>${fmt(col)}</b><span>${CUR} collected</span></div><div class="stat"><b>${fmt(due)}</b><span>${CUR} due</span></div>`
+    : `<div class="stat"><b>${inn}</b><span>Guests in</span></div><div class="stat"><b>${heads - inn}</b><span>Still to arrive</span></div>`);
+}
+function renderNav() {
+  const tabs = S.admin ? [['scan', 'Scan'], ['guests', 'Guests'], ['summary', 'Summary'], ['log', 'Log']] : [['scan', 'Scan']];
+  const n = $('#nav'); n.hidden = tabs.length < 2;
+  setHTML(n, tabs.map(([k, l]) => `<button role="tab" data-tab="${k}" aria-selected="${S.tab === k}">${l}</button>`).join(''));
+  ['scan', 'guests', 'summary', 'log'].forEach(t => $('#p-' + t).hidden = t !== S.tab);
+}
+
+function renderScan() {
+  const v = S.verdict, icon = { ok: '✓', warn: '!', bad: '✕' };
+  setHTML($('#verdict'), v ? `<div class="verdict ${v.kind}" role="status"><div class="ic" aria-hidden="true">${icon[v.kind]}</div><div style="min-width:0"><b>${esc(v.title)}</b><span>${esc(v.detail)}</span></div></div>` : '');
+  $('#walkinbtn').hidden = !S.admin; $('#actrow').style.gridTemplateColumns = S.admin ? '' : '1fr';
+  const raw = $('#q').value.trim(), q = raw.toLowerCase(), qd = digits(q);
+  let h = '';
+  if (!q) {
+    const g = S.openId && byCode(S.openId);
+    if (g) h = doorCard(g);
+    else if (!S.verdict) {
+      if (!S.loaded) h = '<div class="empty"><b>Loading guest list</b>One moment.</div>';
+      else if (!S.guests.length) h = S.admin
+        ? `<div class="empty"><b>Getting started</b><ol class="steps"><li>Set the price per head in Summary</li><li>Add guests in the Guests tab and record their payment</li><li>Send each paid guest their QR ticket</li><li>Scan tickets here on the night</li></ol></div>`
+        : '<div class="empty"><b>No guests yet</b>The admin has not added any guests.</div>';
+      else h = '<div class="empty"><b>Ready for the next guest</b>Start the camera and hold the ticket QR in the frame, or type a name, phone number or ticket code.</div>';
+    }
+  } else {
+    const res = S.guests.filter(g => (g.name || '').toLowerCase().includes(q) || (qd.length >= 3 && digits(g.phone).includes(qd)) || (g.code && g.code.toLowerCase().startsWith(q.replace(/-/g, ''))))
+      .sort((a, b) => (a.name || '').localeCompare(b.name || '')).slice(0, 20);
+    h = res.length ? res.map(doorCard).join('') : `<div class="empty"><b>No guest found for "${esc(raw)}"</b>${S.admin ? 'Not on the list. Use Register walk-in.' : 'Not on the list. Send the guest to the admin desk.'}</div>`;
+  }
+  setHTML($('#results'), h);
+}
+function doorCard(g) {
+  const open = S.openId === g.code, rem = remOf(g), bal = balOf(g) || dueOf(g);
+  const st = ui[g.code] || (ui[g.code] = {});
+  if (st.n == null || st.n > rem || st.n < 1) st.n = Math.max(1, rem);
+  let act = '';
+  if (open) {
+    const id = esc(g.code);
+    if (g.status === 'revoked') act = '<div class="g-act"><div class="hint">This ticket is cancelled. Do not admit.</div></div>';
+    else if (rem <= 0) act = `<div class="g-act"><div class="hint">All ${g.heads} guests have arrived${g.arrivedAt ? ' (last entry ' + timeStr(g.arrivedAt) + (g.lastBy ? ' by ' + esc(g.lastBy) : '') + ')' : ''}.</div>${S.admin ? `${+g.lastN > 0 ? `<button class="btn ghost small" data-act="undo" data-id="${id}">Undo last entry (${g.lastN})</button>` : ''}<button class="btn ghost small" data-act="edit" data-id="${id}">Open guest record</button>` : ''}</div>`;
+    else if (!isPaid(g)) {
+      if (!S.admin) act = '<div class="g-act"><div class="hint">Payment is not complete. Send the guest to the admin desk.</div></div>';
+      else act = `<div class="g-act">
+        <div class="due"><span class="hint">To collect at the door</span><b>${fmt(bal)} ${CUR}</b></div>
+        <div class="chips" role="group" aria-label="Payment method">${METHODS.map(m => `<button class="chip" data-act="method" data-id="${id}" data-m="${esc(m)}" aria-pressed="${st.method === m}">${m}</button>`).join('')}</div>
+        ${rem > 1 ? stepper(g, st) : ''}
+        <button class="btn" data-act="collect" data-id="${id}" ${priced() ? '' : 'disabled'}>Collect ${fmt(bal)} and admit ${st.n}</button>
+        ${!priced() ? '<div class="hint">Set the price per head in Summary first.</div>' : ''}
+        <button class="btn ghost small" data-act="edit" data-id="${id}">Edit guest</button></div>`;
+    } else act = `<div class="g-act">${rem > 1 ? stepper(g, st) : ''}<button class="btn" data-act="admit" data-id="${id}">Admit ${st.n}</button>${S.admin ? `<button class="btn ghost small" data-act="edit" data-id="${id}">Edit guest and payment</button>` : ''}</div>`;
+  }
+  return `<article class="g ${rem <= 0 && (+g.heads) ? 'done' : ''} ${g.status === 'revoked' ? 'rev' : ''}">
+    <button class="g-head" data-act="toggle" data-id="${esc(g.code)}" aria-expanded="${open}">
+      <div style="min-width:0"><div class="g-name">${esc(g.name || 'Unnamed')}</div><div class="g-meta">${metaOf(g)}${S.admin ? ' · ' + esc(fmtCode(g.code)) : ''}</div></div>
+      <div class="pills">${g.status === 'revoked' ? '' : payPill(g)}${inPill(g)}</div></button>${act}</article>`;
+}
+const stepper = (g, st) => `<div class="stepper"><span class="hint">Guests entering now</span><div class="ctl"><button data-act="dec" data-id="${esc(g.code)}" aria-label="One fewer">−</button><output>${st.n}</output><button data-act="inc" data-id="${esc(g.code)}" aria-label="One more">+</button></div></div>`;
+
+const FILTERS = [['all', 'All'], ['unpaid', 'Unpaid'], ['paid', 'Paid'], ['waiting', 'Not arrived'], ['in', 'Arrived'], ['walkin', 'Walk-ins'], ['cancelled', 'Cancelled']];
+function renderGuests() {
+  setHTML($('#filters'), FILTERS.map(([k, l]) => `<button class="chip" data-act="filter" data-k="${k}" aria-pressed="${S.filter === k}">${l}</button>`).join(''));
+  const q = $('#gq').value.trim().toLowerCase(), qd = digits(q);
+  const list = S.guests.filter(g => {
+    const rev = g.status === 'revoked';
+    if (S.filter === 'cancelled') return rev;
+    if (rev) return false;
+    if (q && !((g.name || '').toLowerCase().includes(q) || (qd.length >= 3 && digits(g.phone).includes(qd)) || (g.code || '').toLowerCase().startsWith(q.replace(/-/g, '')))) return false;
+    const s = payState(g);
+    return S.filter === 'all' || (S.filter === 'unpaid' && s !== 'paid') || (S.filter === 'paid' && s === 'paid') || (S.filter === 'waiting' && remOf(g) > 0) || (S.filter === 'in' && inOf(g) > 0) || (S.filter === 'walkin' && g.type === 'walkin');
+  }).sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+  let h;
+  if (!S.guests.length) h = `<div class="empty"><b>${S.loaded ? 'No guests yet' : 'Loading guest list'}</b>${S.loaded ? 'Tap Add guest to record a booking and its payment. Paid guests get a QR ticket.' : ''}</div>`;
+  else if (!list.length) h = '<div class="empty"><b>No guests match</b>Change the filter or search.</div>';
+  else h = list.map(g => `<article class="g has-tk ${remOf(g) <= 0 && (+g.heads) ? 'done' : ''} ${g.status === 'revoked' ? 'rev' : ''}">
+    <button class="g-head" data-act="edit" data-id="${esc(g.code)}"><div style="min-width:0"><div class="g-name">${esc(g.name || 'Unnamed')}</div><div class="g-meta">${metaOf(g)}${paidOf(g) ? ' · paid ' + fmt(paidOf(g)) : ''}${g.method ? ' (' + esc(g.method) + ')' : ''}</div></div>
+    <div class="pills">${g.status === 'revoked' ? '' : payPill(g)}${inPill(g)}</div></button>${isPaid(g) && g.status !== 'revoked' ? `<button class="tkb" data-act="ticket" data-id="${esc(g.code)}" aria-label="Show QR ticket for ${esc(g.name)}">QR<br>ticket</button>` : ''}</article>`).join('');
+  setHTML($('#glist'), h);
+}
+
+function renderSummary() {
+  const L = live(), heads = L.reduce((a, g) => a + (+g.heads || 0), 0), inn = L.reduce((a, g) => a + inOf(g), 0);
+  const pre = L.filter(g => g.type !== 'walkin').reduce((a, g) => a + (+g.heads || 0), 0);
+  const exp = L.reduce((a, g) => a + dueOf(g), 0), col = L.reduce((a, g) => a + paidOf(g), 0), out = L.reduce((a, g) => a + balOf(g), 0);
+  const by = {}; L.forEach(g => { if (paidOf(g) > 0) { const m = g.method || 'Not recorded'; by[m] = (by[m] || 0) + paidOf(g); } });
+  const cnt = k => L.filter(g => payState(g) === k).length, cancelled = S.guests.length - L.length;
+  const demo = Store.mode === 'demo' ? `<div class="card"><h2>Demo tools</h2><div class="row2"><button class="btn ghost" data-act="sample">Load sample guests</button><button class="btn danger" data-act="clearall">Clear all demo data</button></div></div>` : '';
+  const h = `
+    <div class="card"><h2>Event settings</h2>
+      <div class="row2">
+        <label>Price per head (${CUR})<input id="price" type="number" inputmode="decimal" step="0.001" min="0" value="${priced() ? S.cfg.price : ''}"></label>
+        <label>Event date<input id="evdate" type="text" placeholder="e.g. 7 Nov 2026" value="${esc(S.cfg.date)}"></label>
+      </div>
+      <div style="margin-top:10px"><button class="btn small" data-act="savecfg" id="savecfg">Save settings</button></div>
+      <p class="hint" style="margin:10px 0 0">New bookings and unpaid bookings use this price. Bookings that already have a payment keep the price they were booked at, so QR tickets already issued stay valid.</p>
+    </div>
+    <div class="card"><h2>Guests</h2><div class="rows">
+      <div><span>Registered</span><b>${heads}</b></div><div><span>Pre-booked</span><b>${pre}</b></div><div><span>Walk-ins</span><b>${heads - pre}</b></div>
+      <div><span>Inside now</span><b>${inn}</b></div><div><span>Still to arrive</span><b>${heads - inn}</b></div>${cancelled ? `<div><span>Cancelled bookings</span><b>${cancelled}</b></div>` : ''}</div></div>
+    <div class="card"><h2>Money (${CUR})</h2><div class="rows">
+      <div><span>Expected</span><b>${fmt(exp)}</b></div><div><span>Collected</span><b>${fmt(col)}</b></div><div><span>Still to collect</span><b>${fmt(out)}</b></div>
+      <div><span>Bookings paid / part / unpaid</span><b>${cnt('paid')} / ${cnt('partial')} / ${cnt('unpaid')}</b></div>${L.some(g => g.sponsor) ? `<div><span>Sponsors (${L.filter(g => g.sponsor).length}) extra amount</span><b>${fmt(L.reduce((a, g) => a + (g.sponsor ? (+g.sponsorExtra || 0) : 0), 0))}</b></div>` : ''}</div></div>
+    <div class="card"><h2>Collected by method</h2><div class="rows">${Object.keys(by).length ? Object.keys(by).map(m => `<div><span>${esc(m)}</span><b>${fmt(by[m])}</b></div>`).join('') : '<div><span class="hint">No payments recorded yet</span></div>'}</div></div>
+    <button class="btn ghost" data-act="export" ${S.guests.length ? '' : 'disabled'}>Download guest list (CSV)</button>${demo}`;
+  const el = $('#sumbody');
+  if (!el.contains(document.activeElement) || document.activeElement === document.body) setHTML(el, h);
+}
+
+const RES_LABEL = { admitted: ['Admitted', 'ok'], verified: ['Verified', 'info'], duplicate: ['Duplicate', 'bad'], unpaid: ['Unpaid', 'warn'], revoked: ['Cancelled ticket', 'bad'], notfound: ['Unknown code', 'bad'] };
+function renderLog() {
+  const rows = S.scans.filter(s => S.logFilter === 'all' || !['admitted', 'verified'].includes(s.result));
+  const dups = S.scans.filter(s => s.result === 'duplicate').length, bad = S.scans.filter(s => ['revoked', 'notfound'].includes(s.result)).length;
+  const fl = [['all', 'All scans'], ['problems', 'Problems only']].map(([k, l]) => `<button class="chip" data-act="logfilter" data-k="${k}" aria-pressed="${S.logFilter === k}">${l}</button>`).join('');
+  const sum = `<div class="card"><div class="rows"><div><span>Duplicate scan attempts</span><b>${dups}</b></div><div><span>Unknown or cancelled codes</span><b>${bad}</b></div><div><span>Entries logged (latest 300 scans)</span><b>${S.scans.filter(s => s.result === 'admitted').length}</b></div></div></div>`;
+  const body = rows.length ? rows.map(s => { const [l, c] = RES_LABEL[s.result] || [s.result, 'info']; return `<div class="logrow"><span class="t">${esc(dateTimeStr(s.t))}</span><div style="min-width:0"><div class="g-name" style="font-size:15px">${esc(s.name || 'Unknown')}${s.n ? ' ×' + s.n : ''}</div><div class="g-meta">${esc(fmtCode(s.code))} · ${esc(s.by)}</div></div><span class="pill ${c}">${l}</span></div>`; }).join('') : '<div class="empty"><b>No scans yet</b>Every scan at the gate is recorded here with who scanned it.</div>';
+  setHTML($('#logbody'), sum + `<div class="chips">${fl}</div>` + body);
+}
+function renderAll() {
+  renderHeader(); renderStats();
+  if (S.tab === 'scan') renderScan();
+  if (S.tab === 'guests') renderGuests();
+  if (S.tab === 'summary') renderSummary();
+  if (S.tab === 'log') renderLog();
+}
+function showTab(t) {
+  if (t !== 'scan' && cam.running) camStop();
+  S.tab = t; renderNav(); if (t === 'summary') $('#sumbody')._h = null; renderAll();
+}
+
+/* ============================================================
+   SHEETS
+   ============================================================ */
+function openSheet(html) {
+  const o = $('#overlay'); o.innerHTML = `<div class="sheet" role="dialog" aria-modal="true">${html}</div>`; o.hidden = false;
+  const f = o.querySelector('input:not([type=hidden]),textarea'); if (f && matchMedia('(pointer:fine)').matches) f.focus();
+}
+function closeSheet() { const o = $('#overlay'); o.hidden = true; o.innerHTML = ''; overlayState = {}; }
+
+/* ---- walk-in ---- */
+function walkinSheet() {
+  const pre = $('#q').value.trim(), isPh = digits(pre).length >= 6;
+  overlayState = { n: 1, method: '' };
+  openSheet(`<h2>Register walk-in</h2>
+    <label>Name<input id="w-name" value="${isPh ? '' : esc(pre)}" autocomplete="off"></label>
+    <label>Phone<input id="w-phone" value="${isPh ? esc(pre) : ''}" inputmode="tel" autocomplete="off"></label>
+    <div class="stepper"><span class="hint">Number of guests</span><div class="ctl"><button data-act="wdec" aria-label="One fewer">−</button><output id="w-n">1</output><button data-act="winc" aria-label="One more">+</button></div></div>
+    <div class="due"><span class="hint">Total to collect</span><b id="w-total">${fmt(priced() ? S.cfg.price : 0)} ${CUR}</b></div>
+    <div class="chips" role="group" aria-label="Payment method" id="w-methods">${METHODS.map(m => `<button class="chip" data-act="wmethod" data-m="${esc(m)}" aria-pressed="false">${m}</button>`).join('')}</div>
+    <button class="btn" data-act="wsave" ${priced() ? '' : 'disabled'}>Collect and admit</button>
+    ${priced() ? '' : '<div class="hint">Set the price per head in Summary first.</div>'}
+    <button class="btn ghost" data-act="close">Cancel</button>`);
+}
+function walkinUpdate() {
+  $('#w-n').textContent = overlayState.n;
+  $('#w-total').textContent = fmt(priced() ? overlayState.n * S.cfg.price : 0) + ' ' + CUR;
+  document.querySelectorAll('#w-methods .chip').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.m === overlayState.method)));
+}
+async function walkinSave(btn) {
+  const name = $('#w-name').value.trim();
+  if (!name) { toast('Enter the guest name', true); return; }
+  if (!overlayState.method) { toast('Choose how the guest paid', true); return; }
+  const n = overlayState.n, paid = n * S.cfg.price, now = Date.now();
+  btn.disabled = true;
+  try {
+    const code = await Store.createGuest({ name, phone: $('#w-phone').value.trim(), heads: n, type: 'walkin', paid, due: paid, paidFull: true, method: overlayState.method, ref: '', notes: '', status: 'active', arrived: n, arrivedAt: now, lastBy: S.user.email, lastN: n, createdAt: now, createdBy: S.user.email });
+    closeSheet(); toast(`${name} registered and admitted`);
+    logScan(code, { name }, 'admitted', n);
+    $('#q').value = ''; S.verdict = null; S.openId = null; renderScan();
+  } catch (e) { btn.disabled = false; toast('Could not save: ' + niceErr(e), true); }
+}
+
+/* ---- add / edit guest ---- */
+const payModeOf = g => paidOf(g) <= 0 ? 'none' : (g.paidFull ? (g.sponsor ? 'sponsor' : 'full') : 'part');
+function guestSheet(code) {
+  const g = code ? byCode(code) : { name: '', phone: '', heads: 1, type: 'prebooked', paid: 0, method: '', ref: '', notes: '' };
+  if (!g) return;
+  const mode = payModeOf(g);
+  overlayState = { code, dupOk: false };
+  const rev = g.status === 'revoked';
+  openSheet(`<h2>${code ? 'Edit guest' : 'Add guest'}</h2>
+    ${rev ? '<div class="banner">This ticket is cancelled. It cannot be used for entry.</div>' : ''}
+    <label>Name<input id="f-name" value="${esc(g.name)}" autocomplete="off"></label>
+    <div class="row2"><label>Phone<input id="f-phone" value="${esc(g.phone)}" inputmode="tel"></label>
+    <label>Guests<input id="f-heads" type="number" min="1" max="50" value="${esc(g.heads)}" inputmode="numeric"></label></div>
+    <label>Payment<select id="f-pay"><option value="none" ${mode === 'none' ? 'selected' : ''}>Not paid yet</option><option value="full" ${mode === 'full' ? 'selected' : ''}>Paid in full</option><option value="part" ${mode === 'part' ? 'selected' : ''}>Part payment</option><option value="sponsor" ${mode === 'sponsor' ? 'selected' : ''}>Sponsor (paid extra)</option></select></label>
+    <div id="f-paid-box" ${mode === 'none' ? 'hidden' : ''} class="list">
+      <div id="f-amt-row" ${mode === 'part' || mode === 'sponsor' ? '' : 'hidden'}><label>Amount paid (${CUR})<input id="f-paid" type="number" step="0.001" min="0" value="${paidOf(g) || ''}" inputmode="decimal"></label><div id="f-sp-hint" class="hint" ${mode === 'sponsor' ? '' : 'hidden'}>Sponsor: enter the total amount paid. It must be more than the ticket price for the guests. The extra is recorded as sponsorship.</div></div>
+      <div class="row2"><label>Method<select id="f-method"><option value="">Choose</option>${METHODS.map(m => `<option ${g.method === m ? 'selected' : ''}>${m}</option>`).join('')}</select></label>
+      <label>Receipt or transfer ref<input id="f-ref" value="${esc(g.ref)}"></label></div>
+    </div>
+    <div class="hint">${priced() ? `Price per head ${fmt(S.cfg.price)} ${CUR}. A QR ticket is issued once the booking is paid in full.` : 'Set the price per head in Summary to work out amounts due.'}</div>
+    ${code ? `<div class="row2"><label>Registration<select id="f-type"><option value="prebooked" ${g.type !== 'walkin' ? 'selected' : ''}>Pre-booked</option><option value="walkin" ${g.type === 'walkin' ? 'selected' : ''}>Walk-in</option></select></label><label>Guests arrived<input id="f-arr" type="number" min="0" value="${inOf(g)}" inputmode="numeric"></label></div>` : ''}
+    <label>Notes<input id="f-notes" value="${esc(g.notes)}"></label>
+    <div id="f-warn" class="banner" hidden></div>
+    <button class="btn" data-act="gsave">Save</button>
+    ${code && !rev && g.paidFull ? '<button class="btn ghost" data-act="ticketfrom">Show QR ticket</button>' : ''}
+    ${code && !rev ? '<button class="btn ghost" data-act="reissue">Issue a new QR code (cancels the old one)</button><button class="btn danger" data-act="cancelbk">Cancel booking (refunded)</button>' : ''}
+    ${code ? '<button class="btn danger" data-act="gdel">Delete record</button>' : ''}
+    <button class="btn ghost" data-act="close">Close</button>`);
+}
+async function guestSave(btn) {
+  const name = $('#f-name').value.trim();
+  if (!name) { toast('Enter the guest name', true); return; }
+  const heads = Math.max(1, Math.min(50, parseInt($('#f-heads').value, 10) || 1));
+  const mode = $('#f-pay').value, code = overlayState.code, old = code ? byCode(code) : null;
+  const phone = $('#f-phone').value.trim();
+  if (!code && digits(phone).length >= 6 && !overlayState.dupOk) {
+    const dup = live().find(x => digits(x.phone) === digits(phone));
+    if (dup) { const w = $('#f-warn'); w.hidden = false; w.textContent = `This phone number is already booked under ${dup.name} (${dup.heads} guests). Tap Save again to add this booking anyway.`; overlayState.dupOk = true; return; }
+  }
+  let paid = 0;
+  if (mode === 'full') { if (!priced()) { toast('Set the price per head first, or choose Part payment', true); return; } paid = heads * S.cfg.price; }
+  else if (mode === 'part') paid = Math.max(0, parseFloat($('#f-paid').value) || 0);
+  else if (mode === 'sponsor') {
+    if (!priced()) { toast('Set the price per head first', true); return; }
+    paid = Math.max(0, parseFloat($('#f-paid').value) || 0);
+    if (paid <= heads * S.cfg.price + 0.0005) { toast(`Sponsor amount must be more than ${fmt(heads * S.cfg.price)} ${CUR}`, true); return; }
+  }
+  const method = mode === 'none' ? '' : $('#f-method').value;
+  if (paid > 0 && !method) { toast('Choose how they paid', true); return; }
+  const pay = calcPay(heads, paid);
+  const data = { name, phone, heads, paid, due: pay.due, paidFull: pay.paidFull, sponsor: mode === 'sponsor', sponsorExtra: mode === 'sponsor' ? Math.round((paid - pay.due) * 1000) / 1000 : 0, method, ref: mode === 'none' ? '' : $('#f-ref').value.trim(), notes: $('#f-notes').value.trim() };
+  btn.disabled = true;
+  try {
+    let g;
+    if (code) {
+      data.type = $('#f-type').value; data.arrived = Math.max(0, Math.min(heads, parseInt($('#f-arr').value, 10) || 0));
+      if (paid > paidOf(old)) { data.collectedBy = S.user.email; data.paidAt = Date.now(); }
+      await Store.updateGuest(code, data); g = { ...old, ...data, code };
+    } else {
+      const now = Date.now();
+      Object.assign(data, { type: 'prebooked', status: 'active', arrived: 0, arrivedAt: 0, lastBy: '', lastN: 0, createdAt: now, createdBy: S.user.email, replacedBy: null });
+      if (paid > 0) { data.collectedBy = S.user.email; data.paidAt = now; }
+      const nc = await Store.createGuest(data); g = { ...data, code: nc };
+    }
+    closeSheet(); toast('Saved');
+    if (g.paidFull && (!old || !old.paidFull)) ticketSheet(g, true);
+  } catch (e) { btn.disabled = false; toast('Could not save: ' + niceErr(e), true); }
+}
+
+/* ---- import ---- */
+function importSheet() {
+  openSheet(`<h2>Import guest list</h2>
+    <p class="hint" style="margin:0">One guest per line: name, phone, guests, amount paid, method, reference. Only the name is required. Separate with commas or tabs. Rows are checked for duplicate phone numbers.</p>
+    <textarea id="imp" placeholder="Ahmed Khan, 96891234567, 2, 20, Bank transfer, TRX-1001&#10;Sara Ali, 96899887766, 3"></textarea>
+    <button class="btn" data-act="doimport">Import</button><button class="btn ghost" data-act="close">Cancel</button>`);
+}
+async function doImport(btn) {
+  const lines = $('#imp').value.split(/\n/).map(l => l.trim()).filter(Boolean);
+  if (!lines.length) { toast('Paste at least one line', true); return; }
+  btn.disabled = true; let ok = 0, skipped = 0; const seen = new Set(live().map(g => digits(g.phone)).filter(p => p.length >= 6));
+  for (const l of lines) {
+    const p = l.split(/[,\t;]/).map(s => s.trim()); if (!p[0]) continue;
+    const ph = digits(p[1]); if (ph.length >= 6 && seen.has(ph)) { skipped++; continue; } if (ph.length >= 6) seen.add(ph);
+    const heads = Math.max(1, parseInt(p[2], 10) || 1), paid = Math.max(0, parseFloat(p[3]) || 0), pay = calcPay(heads, paid), now = Date.now();
+    const m = METHODS.find(x => x.toLowerCase() === (p[4] || '').toLowerCase()) || '';
+    try { await Store.createGuest({ name: p[0], phone: p[1] || '', heads, type: 'prebooked', paid, due: pay.due, paidFull: pay.paidFull, method: m, ref: p[5] || '', notes: '', status: 'active', arrived: 0, arrivedAt: 0, lastBy: '', lastN: 0, createdAt: now, createdBy: S.user.email, replacedBy: null }); ok++; }
+    catch (e) { toast(`Stopped after ${ok}: ${niceErr(e)}`, true); break; }
+  }
+  closeSheet(); if (ok || skipped) toast(`${ok} imported${skipped ? `, ${skipped} skipped (phone already booked)` : ''}.`);
+}
+
+/* ============================================================
+   TICKETS
+   ============================================================ */
+function ticketCardHtml(g) {
+  const n = +g.heads || 1;
+  return `<div class="tk-top"><b>${esc(CFG.eventName)}</b><span>${esc([CFG.featuring, CFG.tagline].filter(Boolean).join(' · '))}</span></div>
+    <div class="tk-qr">${qrSvg(g.code)}</div><div class="tk-code">${esc(fmtCode(g.code))}</div>
+    ${g.name ? `<div class="tk-name">${esc(g.name)}</div>` : ''}<div class="tk-meta">${n} ${n === 1 ? 'guest' : 'guests'} · Paid</div>
+    <div class="tk-foot">${esc(CFG.venue)}${S.cfg.date || g.date ? ' · ' + esc(S.cfg.date || g.date) : ''}<br>Show this QR code at the entrance</div>`;
+}
+function waText(g) {
+  const n = +g.heads || 1;
+  return `Hello ${g.name}, your ticket for the ${CFG.eventName} (${[CFG.featuring, CFG.tagline].filter(Boolean).join(', ')}) at ${CFG.venue}${S.cfg.date ? ' on ' + S.cfg.date : ''} is confirmed for ${n} ${n === 1 ? 'guest' : 'guests'}.\n\nYour QR ticket (open the link and show the QR code at the entrance):\n${personalLink(g)}\n\nTicket code: ${fmtCode(g.code)}`;
+}
+function waUrl(g) {
+  let p = digits(g.phone); if (p.startsWith('00')) p = p.slice(2); if (p.length === 8) p = '968' + p;
+  return `https://wa.me/${p}?text=${encodeURIComponent(waText(g))}`;
+}
+function ticketSheet(g, fresh) {
+  overlayState = { ticket: g, png: makeTicketBlob(g) };
+  openSheet(`<h2>${fresh ? 'Payment recorded. Ticket ready' : 'QR ticket'}</h2>
+    <div class="ticket">${ticketCardHtml(g)}</div>
+    <button class="btn" data-act="tkshare">Share ticket image (WhatsApp, etc.)</button>
+    <a class="btn ghost" href="${esc(waUrl(g))}" target="_blank" rel="noopener">WhatsApp message with ticket link</a>
+    <button class="btn ghost" data-act="tkpng">Save ticket image</button>
+    <button class="btn ghost" data-act="tkcopy">Copy ticket link</button>
+    <div class="hint">The share button sends the QR image itself where the phone allows it. The message button sends a private link that opens the QR ticket for the guest, plus the ticket code as a backup.</div>
+    <button class="btn ghost" data-act="close">Done</button>`);
+}
+function makeTicketBlob(g) {
+  const W = 900, H = 1320, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+  const c = cv.getContext('2d');
+  c.fillStyle = '#FFFFFF'; c.fillRect(0, 0, W, H);
+  c.fillStyle = '#27479A'; c.fillRect(0, 0, W, 250);
+  c.fillStyle = '#FFFFFF'; c.textAlign = 'center';
+  const words = String(CFG.eventName).split(' '); let l1 = words.slice(0, Math.ceil(words.length / 2)).join(' '), l2 = words.slice(Math.ceil(words.length / 2)).join(' ');
+  c.font = '600 54px Fraunces, Georgia, serif'; c.fillText(l1, W / 2, 85); c.fillText(l2, W / 2, 150);
+  c.font = '27px "Public Sans", Arial, sans-serif'; c.fillText([CFG.featuring, CFG.tagline].filter(Boolean).join(' · '), W / 2, 205);
+  const q = QRLib.make(ticketUrl(g.code)), n = q.getModuleCount(), cell = Math.floor(640 / (n + 8)), size = cell * (n + 8), x0 = Math.round((W - size) / 2), y0 = 285;
+  c.fillStyle = '#FFFFFF'; c.fillRect(x0, y0, size, size); c.fillStyle = '#000000';
+  for (let r = 0; r < n; r++) for (let k = 0; k < n; k++) if (q.isDark(r, k)) c.fillRect(x0 + (k + 4) * cell, y0 + (r + 4) * cell, cell, cell);
+  const by = y0 + size + 60;
+  c.fillStyle = '#16202C'; c.font = '700 54px ui-monospace, Menlo, Consolas, monospace'; c.fillText(fmtCode(g.code), W / 2, by);
+  if (g.name) { c.font = '600 56px Fraunces, Georgia, serif'; c.fillText(String(g.name).slice(0, 28), W / 2, by + 90); }
+  const gn = +g.heads || 1;
+  c.fillStyle = '#4A5562'; c.font = '34px "Public Sans", Arial, sans-serif'; c.fillText(`${gn} ${gn === 1 ? 'guest' : 'guests'} · Paid`, W / 2, by + 145);
+  c.font = '30px "Public Sans", Arial, sans-serif';
+  c.fillText(CFG.venue + (S.cfg.date || g.date ? ' · ' + (S.cfg.date || g.date) : ''), W / 2, by + 205);
+  c.fillText('Show this QR code at the entrance', W / 2, by + 250);
+  return new Promise(res => cv.toBlob(res, 'image/png'));
+}
+const ticketFile = g => 'ticket-' + (String(g.name || 'guest').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'guest') + '.png';
+function downloadBlob(blob, name) {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+}
+async function ticketShare() {
+  const g = overlayState.ticket; if (!g) return;
+  const blob = await overlayState.png, file = new File([blob], ticketFile(g), { type: 'image/png' });
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try { await navigator.share({ files: [file], text: waText(g), title: CFG.eventName }); return; }
+    catch (e) { if (e && e.name === 'AbortError') return; }
+  }
+  downloadBlob(blob, ticketFile(g)); toast('Sharing is not available here. The image was saved: attach it in WhatsApp.');
+}
+async function ticketSave() { const g = overlayState.ticket; if (g) downloadBlob(await overlayState.png, ticketFile(g)); }
+async function copyText(t) {
+  try { await navigator.clipboard.writeText(t); toast('Copied'); }
+  catch (e) { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); toast('Copied'); } catch (e2) { toast('Could not copy', true); } ta.remove(); }
+}
+
+/* guest-facing ticket page: no login, nothing read from the database */
+function showGuestTicket(p) {
+  const g = { code: p.code, name: p.name, heads: p.heads };
+  document.title = CFG.eventName + ' ticket';
+  $('#gt-card').innerHTML = ticketCardHtml(g);
+  $('#v-boot').hidden = true; $('#v-ticket').hidden = false;
+  overlayState = { ticket: g, png: makeTicketBlob(g) };
+}
+
+/* ---------- CSV ---------- */
+function exportCsv() {
+  const q = s => '"' + String(s ?? '').replace(/"/g, '""') + '"';
+  const rows = [['Name','Phone','Guests','Registration','Status','Due','Paid','Balance','Method','Reference','Ticket code','Arrived','Collected by','Notes','Sponsor','Sponsor extra']];
+  S.guests.slice().sort((a, b) => (a.name || '').localeCompare(b.name || '')).forEach(g => rows.push([g.name, g.phone, g.heads, g.type === 'walkin' ? 'Walk-in' : 'Pre-booked', g.status === 'revoked' ? 'Cancelled' : 'Active', fmt(dueOf(g)), fmt(paidOf(g)), fmt(balOf(g)), g.method, g.ref, fmtCode(g.code), inOf(g), g.collectedBy, g.notes, g.sponsor ? 'Yes' : '', g.sponsor ? fmt(+g.sponsorExtra || 0) : '']));
+  downloadBlob(new Blob(['﻿' + rows.map(r => r.map(q).join(',')).join('\n')], { type: 'text/csv;charset=utf-8' }), 'gb-independence-day-guests.csv');
+}
+
+/* ============================================================
+   ACTIONS
+   ============================================================ */
+async function collectAndAdmit(code) {
+  const g = byCode(code), st = ui[code] || {}; if (!g || !priced()) return;
+  if (!st.method) { toast('Choose how the guest paid', true); return; }
+  const due = dueOf(g), n = Math.min(Math.max(1, st.n || remOf(g)), remOf(g));
+  try { await Store.updateGuest(code, { paid: due, due, paidFull: true, method: st.method, collectedBy: S.user.email, paidAt: Date.now() }); }
+  catch (e) { toast('Could not record payment: ' + niceErr(e), true); return; }
+  await admit(code, n);
+}
+async function savePrice(btn) {
+  const price = parseFloat($('#price').value), date = $('#evdate').value.trim();
+  if (isNaN(price) || price < 0) { toast('Enter the price per head', true); return; }
+  const changed = !priced() || price !== S.cfg.price;
+  // Bookings that already have a payment keep the price they were booked at, so issued tickets stay valid.
+  const list = changed ? live().filter(g => paidOf(g) <= 0).map(g => ({ code: g.code, patch: { due: (+g.heads || 0) * price, paidFull: false } }))
+    .filter(x => { const g = byCode(x.code); return +g.due !== x.patch.due; }) : [];
+  if (priced() && changed && list.length && !btn.dataset.sure) { btn.dataset.sure = '1'; btn.textContent = `Tap again to update ${list.length} unpaid bookings`; return; }
+  try {
+    await Store.setConfig({ price, date });
+    if (list.length) await Store.bulkUpdate(list);
+    toast('Settings saved'); delete btn.dataset.sure; btn.textContent = 'Save settings';
+  } catch (e) { toast('Could not save: ' + niceErr(e), true); }
+}
+async function loadSamples() {
+  try {
+    if (!priced()) await Store.setConfig({ price: 10, date: S.cfg.date || '' });
+    const price = priced() ? S.cfg.price : 10, now = Date.now();
+    const rows = [['Ahmed Khan', '96891234567', 2, 'full'], ['Sara Ali', '96899887766', 3, 'full'], ['Bilal Hussain', '96895551234', 1, 'none'], ['Fatima Noor', '96892223344', 4, 'part'], ['Imran Baig', '96897776655', 2, 'full']];
+    for (const [name, phone, heads, mode] of rows) {
+      const due = heads * price, paid = mode === 'full' ? due : mode === 'part' ? Math.round(due / 2) : 0;
+      await Store.createGuest({ name, phone, heads, type: 'prebooked', paid, due, paidFull: paid >= due && paid > 0, method: paid ? 'Cash' : '', ref: '', notes: 'Sample data', status: 'active', arrived: 0, arrivedAt: 0, lastBy: '', lastN: 0, createdAt: now, createdBy: S.user.email, replacedBy: null });
+    }
+    toast('Sample guests added');
+  } catch (e) { toast('Could not add samples: ' + niceErr(e), true); }
+}
+
+document.addEventListener('click', async ev => {
+  const tb = ev.target.closest('[data-tab]'); if (tb) { showTab(tb.dataset.tab); return; }
+  const b = ev.target.closest('[data-act]'); if (!b) { if (ev.target.id === 'overlay') closeSheet(); return; }
+  const a = b.dataset.act, id = b.dataset.id;
+  try {
+    switch (a) {
+      case 'demo-admin': Store.demoLogin('admin'); break;
+      case 'demo-gate': Store.demoLogin('gate'); break;
+      case 'logout': camStop(); await Store.logout(); break;
+      case 'camstart': camStart(); break;
+      case 'camstop': camStop(); break;
+      case 'flip': cam.facing = cam.facing === 'environment' ? 'user' : 'environment'; if (cam.running) { camStop(); await camStart(); } break;
+      case 'torch': { const tr = cam.stream && cam.stream.getVideoTracks()[0]; if (tr) { cam.torch = !cam.torch; try { await tr.applyConstraints({ advanced: [{ torch: cam.torch }] }); } catch (e) { toast('Torch not available', true); } } break; }
+      case 'photo': $('#scanfile').click(); break;
+      case 'toggle': S.openId = S.openId === id ? null : id; if (S.verdict && S.verdict.code !== id) S.verdict = null; renderScan(); break;
+      case 'method': (ui[id] ||= {}).method = b.dataset.m; renderScan(); break;
+      case 'inc': case 'dec': { const g = byCode(id), st = (ui[id] ||= {}); st.n = Math.min(remOf(g), Math.max(1, (st.n || 1) + (a === 'inc' ? 1 : -1))); renderScan(); break; }
+      case 'admit': admit(id, (ui[id] || {}).n || remOf(byCode(id))); break;
+      case 'collect': collectAndAdmit(id); break;
+      case 'undo': { const g = byCode(id); await Store.updateGuest(id, { arrived: Math.max(0, inOf(g) - (+g.lastN || 0)), lastN: 0 }); S.verdict = null; toast('Last entry undone'); break; }
+      case 'walkin': walkinSheet(); break;
+      case 'winc': overlayState.n = Math.min(50, overlayState.n + 1); walkinUpdate(); break;
+      case 'wdec': overlayState.n = Math.max(1, overlayState.n - 1); walkinUpdate(); break;
+      case 'wmethod': overlayState.method = b.dataset.m; walkinUpdate(); break;
+      case 'wsave': walkinSave(b); break;
+      case 'add': guestSheet(null); break;
+      case 'edit': guestSheet(id); break;
+      case 'gsave': guestSave(b); break;
+      case 'ticket': { const g = byCode(id); if (g) ticketSheet(g, false); break; }
+      case 'ticketfrom': { const g = byCode(overlayState.code); if (g) ticketSheet(g, false); break; }
+      case 'reissue':
+        if (b.dataset.sure) { try { const nc = await Store.reissue(overlayState.code, S.user.email); closeSheet(); toast('New QR code issued. The old one is cancelled.'); setTimeout(() => { const g = byCode(nc); if (g && g.paidFull) ticketSheet(g, false); }, 500); } catch (e) { toast(niceErr(e), true); } }
+        else { b.dataset.sure = '1'; b.textContent = 'Tap again to cancel the old QR and issue a new one'; }
+        break;
+      case 'cancelbk':
+        if (b.dataset.sure) { await Store.updateGuest(overlayState.code, { status: 'revoked', replacedBy: null, revokedAt: Date.now(), revokedBy: S.user.email }); closeSheet(); toast('Booking cancelled'); }
+        else { b.dataset.sure = '1'; b.textContent = 'Tap again to cancel this booking'; }
+        break;
+      case 'gdel':
+        if (b.dataset.sure) { await Store.deleteGuest(overlayState.code); closeSheet(); toast('Record deleted'); }
+        else { b.dataset.sure = '1'; b.textContent = 'Tap again to delete for good'; }
+        break;
+      case 'tkshare': ticketShare(); break;
+      case 'tkpng': ticketSave(); break;
+      case 'tkcopy': if (overlayState.ticket) copyText(personalLink(overlayState.ticket)); break;
+      case 'gt-save': if (overlayState.ticket) downloadBlob(await overlayState.png, ticketFile(overlayState.ticket)); break;
+      case 'import': importSheet(); break;
+      case 'doimport': doImport(b); break;
+      case 'close': closeSheet(); break;
+      case 'filter': S.filter = b.dataset.k; renderGuests(); break;
+      case 'logfilter': S.logFilter = b.dataset.k; renderLog(); break;
+      case 'export': exportCsv(); break;
+      case 'savecfg': savePrice(b); break;
+      case 'sample': loadSamples(); break;
+      case 'clearall':
+        if (b.dataset.sure) { Store.clearAll(); S.verdict = null; S.openId = null; toast('Demo data cleared'); }
+        else { b.dataset.sure = '1'; b.textContent = 'Tap again to clear all demo data'; }
+        break;
+    }
+  } catch (e) { toast(niceErr(e), true); }
+});
+document.addEventListener('change', e => {
+  if (e.target.id === 'f-pay') { const m = e.target.value; $('#f-paid-box').hidden = m === 'none'; $('#f-amt-row').hidden = m !== 'part' && m !== 'sponsor'; const sh = $('#f-sp-hint'); if (sh) sh.hidden = m !== 'sponsor'; }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#overlay').hidden) closeSheet(); });
+$('#auto').addEventListener('change', e => { S.auto = e.target.checked; lsSet('gbid-auto', S.auto ? '1' : '0'); });
+$('#q').addEventListener('input', () => {
+  S.verdict = null; S.openId = null;
+  const v = $('#q').value, c = parseCode(v);
+  if (c && (/[#&?]/.test(v) || byCode(c))) { handleCode(v); return; }
+  renderScan();
+});
+$('#q').addEventListener('keydown', e => { if (e.key === 'Enter') { const c = parseCode($('#q').value); if (c) handleCode($('#q').value); } });
+$('#gq').addEventListener('input', renderGuests);
+$('#scanfile').addEventListener('change', async e => {
+  const f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f) return;
+  toast('Reading ticket…');
+  try { const t = await decodePhoto(f); if (t) { $('#toast').hidden = true; handleCode(t); } else toast('Could not read a QR code. Retake the photo closer and in good light.', true); }
+  catch (err) { toast(errMsg(err), true); }
+});
+document.addEventListener('visibilitychange', () => { if (document.hidden && cam.running) camStop(); });
+
+/* ============================================================
+   LOGIN AND START
+   ============================================================ */
+function showView(v) { ['boot', 'login', 'main', 'ticket'].forEach(x => $('#v-' + x).hidden = x !== v); }
+function showLogin() {
+  unsubs.forEach(u => { try { u(); } catch (e) {} }); unsubs = [];
+  S.user = null; S.admin = false; S.loaded = false; S.guests = []; S.scans = []; S.verdict = null; S.openId = null;
+  $('#l-title').textContent = CFG.eventName; $('#l-sub').textContent = [CFG.featuring, CFG.venue].filter(Boolean).join(' · ');
+  const demo = Store.mode === 'demo';
+  const local = /^(localhost|127\.0\.0\.1|)$/.test(location.hostname) || location.protocol === 'file:';
+  $('#l-form').hidden = demo; $('#l-roles').hidden = !demo || !local; $('#l-demo').hidden = !demo;
+  $('#l-demo').textContent = local ? 'Demo mode: no Firebase settings found, so data stays on this device only. Choose a role to try the app.' : 'Live mode is not set up yet. The owner must add the Firebase settings in index.html before anyone can sign in.';
+  $('#l-err').textContent = ''; showView('login');
+}
+function showMain(u) {
+  S.user = u;
+  S.admin = Store.mode === 'demo' ? u.demoRole === 'admin' : (CFG.adminEmails || []).map(x => String(x).toLowerCase()).includes(u.email);
+  S.tab = 'scan'; S.conn = 'Connecting'; S.loaded = false;
+  $('#demo-note').hidden = Store.mode !== 'demo';
+  $('#auto').checked = S.auto;
+  $('#h-title').textContent = CFG.eventName;
+  showView('main'); renderNav(); renderAll();
+  const onErr = what => e => { S.conn = 'Offline'; renderHeader(); toast(what + ': ' + niceErr(e), true); };
+  unsubs.push(Store.watch('config', c => { S.cfg = { price: c && c.price != null ? +c.price : DEFAULT_PRICE, date: (c && c.date) || '' }; renderAll(); }, onErr('Settings')));
+  unsubs.push(Store.watch('guests', gs => {
+    S.guests = gs; S.loaded = true; S.conn = 'Live';
+    if (S.openId && !byCode(S.openId)) S.openId = null;
+    renderAll();
+    if (S.pending) { const c = S.pending; S.pending = null; handleCode(c); }
+  }, onErr('Guest list')));
+  if (S.admin) unsubs.push(Store.watch('scans', s => { S.scans = s; if (S.tab === 'log') renderLog(); }, onErr('Scan log')));
+}
+$('#l-form').addEventListener('submit', async e => {
+  e.preventDefault(); const btn = $('#l-go'); btn.disabled = true; $('#l-err').textContent = '';
+  try { const u0 = $('#l-email').value.trim().toLowerCase(); await Store.login(u0.includes('@') ? u0 : u0 + '@gbevent.com', $('#l-pass').value); }
+  catch (err) {
+    const c = (err && err.code) || '';
+    $('#l-err').textContent = /invalid-credential|wrong-password|user-not-found|invalid-email/.test(c) ? 'Wrong username or password.' : /too-many/.test(c) ? 'Too many attempts. Wait a few minutes and try again.' : /network/.test(c) ? 'No connection. Check the internet and try again.' : /operation-not-allowed/.test(c) ? 'Email/Password sign-in is not switched on in Firebase (Authentication > Sign-in method).' : /unauthorized-domain/.test(c) ? 'This website address is not added in Firebase (Authentication > Settings > Authorized domains).' : /api-key/.test(c) ? 'The Firebase apiKey in this page is wrong.' : 'Could not sign in: ' + errMsg(err);
+  } finally { btn.disabled = false; }
+});
+function readHash() {
+  const h = location.hash || '';
+  if (/^#my=/.test(h)) {
+    const p = new URLSearchParams(h.slice(1)), code = (p.get('my') || '').toUpperCase();
+    if (CODE_RE.test(code)) return { type: 'guest', code, name: p.get('n') || '', heads: +p.get('g') || 1 };
+  }
+  const m = h.match(/^#t-([A-Za-z0-9]{10})$/);
+  return m ? { type: 'verify', code: m[1].toUpperCase() } : null;
+}
+(async function boot() {
+  const hv = readHash();
+  if (hv && hv.type === 'guest') { showGuestTicket(hv); return; }
+  if (hv && hv.type === 'verify') { S.pending = hv.code; try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
+  try {
+    Store = (CFG.firebase && CFG.firebase.apiKey) ? await makeFirebaseStore(CFG.firebase) : makeDemoStore();
+  } catch (e) {
+    $('#v-boot').innerHTML = '<div class="center">Could not load the database. Check the internet connection and the Firebase settings in this page, then reload.</div>'; return;
+  }
+  Store.onUser(u => { if (!u) showLogin(); else showMain(u); });
+})();
+})();
+</script>
+</body>
+</html>
 
