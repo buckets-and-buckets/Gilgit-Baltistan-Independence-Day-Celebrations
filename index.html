@@ -1884,7 +1884,7 @@ async function decodePhoto(file) {
    ============================================================ */
 function payPill(g) {
   const s = payState(g);
-  if (s === 'paid') return '<span class="pill ok">Paid</span>';
+  if (s === 'paid') return '<span class="pill ok">Paid</span>' + (g.sponsor ? '<span class="pill info">Sponsor</span>' : '');
   if (s === 'partial') return `<span class="pill warn">Balance ${fmt(balOf(g))}</span>`;
   return priced() ? `<span class="pill bad">Unpaid ${fmt(dueOf(g))}</span>` : '<span class="pill bad">Unpaid</span>';
 }
@@ -2012,7 +2012,7 @@ function renderSummary() {
       <div><span>Inside now</span><b>${inn}</b></div><div><span>Still to arrive</span><b>${heads - inn}</b></div>${cancelled ? `<div><span>Cancelled bookings</span><b>${cancelled}</b></div>` : ''}</div></div>
     <div class="card"><h2>Money (${CUR})</h2><div class="rows">
       <div><span>Expected</span><b>${fmt(exp)}</b></div><div><span>Collected</span><b>${fmt(col)}</b></div><div><span>Still to collect</span><b>${fmt(out)}</b></div>
-      <div><span>Bookings paid / part / unpaid</span><b>${cnt('paid')} / ${cnt('partial')} / ${cnt('unpaid')}</b></div></div></div>
+      <div><span>Bookings paid / part / unpaid</span><b>${cnt('paid')} / ${cnt('partial')} / ${cnt('unpaid')}</b></div>${L.some(g => g.sponsor) ? `<div><span>Sponsors (${L.filter(g => g.sponsor).length}) extra amount</span><b>${fmt(L.reduce((a, g) => a + (g.sponsor ? (+g.sponsorExtra || 0) : 0), 0))}</b></div>` : ''}</div></div>
     <div class="card"><h2>Collected by method</h2><div class="rows">${Object.keys(by).length ? Object.keys(by).map(m => `<div><span>${esc(m)}</span><b>${fmt(by[m])}</b></div>`).join('') : '<div><span class="hint">No payments recorded yet</span></div>'}</div></div>
     <button class="btn ghost" data-act="export" ${S.guests.length ? '' : 'disabled'}>Download guest list (CSV)</button>${demo}`;
   const el = $('#sumbody');
@@ -2083,7 +2083,7 @@ async function walkinSave(btn) {
 }
 
 /* ---- add / edit guest ---- */
-const payModeOf = g => paidOf(g) <= 0 ? 'none' : (g.paidFull ? 'full' : 'part');
+const payModeOf = g => paidOf(g) <= 0 ? 'none' : (g.paidFull ? (g.sponsor ? 'sponsor' : 'full') : 'part');
 function guestSheet(code) {
   const g = code ? byCode(code) : { name: '', phone: '', heads: 1, type: 'prebooked', paid: 0, method: '', ref: '', notes: '' };
   if (!g) return;
@@ -2095,9 +2095,9 @@ function guestSheet(code) {
     <label>Name<input id="f-name" value="${esc(g.name)}" autocomplete="off"></label>
     <div class="row2"><label>Phone<input id="f-phone" value="${esc(g.phone)}" inputmode="tel"></label>
     <label>Guests<input id="f-heads" type="number" min="1" max="50" value="${esc(g.heads)}" inputmode="numeric"></label></div>
-    <label>Payment<select id="f-pay"><option value="none" ${mode === 'none' ? 'selected' : ''}>Not paid yet</option><option value="full" ${mode === 'full' ? 'selected' : ''}>Paid in full</option><option value="part" ${mode === 'part' ? 'selected' : ''}>Part payment</option></select></label>
+    <label>Payment<select id="f-pay"><option value="none" ${mode === 'none' ? 'selected' : ''}>Not paid yet</option><option value="full" ${mode === 'full' ? 'selected' : ''}>Paid in full</option><option value="part" ${mode === 'part' ? 'selected' : ''}>Part payment</option><option value="sponsor" ${mode === 'sponsor' ? 'selected' : ''}>Sponsor (paid extra)</option></select></label>
     <div id="f-paid-box" ${mode === 'none' ? 'hidden' : ''} class="list">
-      <div id="f-amt-row" ${mode === 'part' ? '' : 'hidden'}><label>Amount paid (${CUR})<input id="f-paid" type="number" step="0.001" min="0" value="${paidOf(g) || ''}" inputmode="decimal"></label></div>
+      <div id="f-amt-row" ${mode === 'part' || mode === 'sponsor' ? '' : 'hidden'}><label>Amount paid (${CUR})<input id="f-paid" type="number" step="0.001" min="0" value="${paidOf(g) || ''}" inputmode="decimal"></label><div id="f-sp-hint" class="hint" ${mode === 'sponsor' ? '' : 'hidden'}>Sponsor: enter the total amount paid. It must be more than the ticket price for the guests. The extra is recorded as sponsorship.</div></div>
       <div class="row2"><label>Method<select id="f-method"><option value="">Choose</option>${METHODS.map(m => `<option ${g.method === m ? 'selected' : ''}>${m}</option>`).join('')}</select></label>
       <label>Receipt or transfer ref<input id="f-ref" value="${esc(g.ref)}"></label></div>
     </div>
@@ -2124,10 +2124,15 @@ async function guestSave(btn) {
   let paid = 0;
   if (mode === 'full') { if (!priced()) { toast('Set the price per head first, or choose Part payment', true); return; } paid = heads * S.cfg.price; }
   else if (mode === 'part') paid = Math.max(0, parseFloat($('#f-paid').value) || 0);
+  else if (mode === 'sponsor') {
+    if (!priced()) { toast('Set the price per head first', true); return; }
+    paid = Math.max(0, parseFloat($('#f-paid').value) || 0);
+    if (paid <= heads * S.cfg.price + 0.0005) { toast(`Sponsor amount must be more than ${fmt(heads * S.cfg.price)} ${CUR}`, true); return; }
+  }
   const method = mode === 'none' ? '' : $('#f-method').value;
   if (paid > 0 && !method) { toast('Choose how they paid', true); return; }
   const pay = calcPay(heads, paid);
-  const data = { name, phone, heads, paid, due: pay.due, paidFull: pay.paidFull, method, ref: mode === 'none' ? '' : $('#f-ref').value.trim(), notes: $('#f-notes').value.trim() };
+  const data = { name, phone, heads, paid, due: pay.due, paidFull: pay.paidFull, sponsor: mode === 'sponsor', sponsorExtra: mode === 'sponsor' ? Math.round((paid - pay.due) * 1000) / 1000 : 0, method, ref: mode === 'none' ? '' : $('#f-ref').value.trim(), notes: $('#f-notes').value.trim() };
   btn.disabled = true;
   try {
     let g;
@@ -2251,8 +2256,8 @@ function showGuestTicket(p) {
 /* ---------- CSV ---------- */
 function exportCsv() {
   const q = s => '"' + String(s ?? '').replace(/"/g, '""') + '"';
-  const rows = [['Name','Phone','Guests','Registration','Status','Due','Paid','Balance','Method','Reference','Ticket code','Arrived','Collected by','Notes']];
-  S.guests.slice().sort((a, b) => (a.name || '').localeCompare(b.name || '')).forEach(g => rows.push([g.name, g.phone, g.heads, g.type === 'walkin' ? 'Walk-in' : 'Pre-booked', g.status === 'revoked' ? 'Cancelled' : 'Active', fmt(dueOf(g)), fmt(paidOf(g)), fmt(balOf(g)), g.method, g.ref, fmtCode(g.code), inOf(g), g.collectedBy, g.notes]));
+  const rows = [['Name','Phone','Guests','Registration','Status','Due','Paid','Balance','Method','Reference','Ticket code','Arrived','Collected by','Notes','Sponsor','Sponsor extra']];
+  S.guests.slice().sort((a, b) => (a.name || '').localeCompare(b.name || '')).forEach(g => rows.push([g.name, g.phone, g.heads, g.type === 'walkin' ? 'Walk-in' : 'Pre-booked', g.status === 'revoked' ? 'Cancelled' : 'Active', fmt(dueOf(g)), fmt(paidOf(g)), fmt(balOf(g)), g.method, g.ref, fmtCode(g.code), inOf(g), g.collectedBy, g.notes, g.sponsor ? 'Yes' : '', g.sponsor ? fmt(+g.sponsorExtra || 0) : '']));
   downloadBlob(new Blob(['﻿' + rows.map(r => r.map(q).join(',')).join('\n')], { type: 'text/csv;charset=utf-8' }), 'gb-independence-day-guests.csv');
 }
 
@@ -2356,7 +2361,7 @@ document.addEventListener('click', async ev => {
   } catch (e) { toast(niceErr(e), true); }
 });
 document.addEventListener('change', e => {
-  if (e.target.id === 'f-pay') { const m = e.target.value; $('#f-paid-box').hidden = m === 'none'; $('#f-amt-row').hidden = m !== 'part'; }
+  if (e.target.id === 'f-pay') { const m = e.target.value; $('#f-paid-box').hidden = m === 'none'; $('#f-amt-row').hidden = m !== 'part' && m !== 'sponsor'; const sh = $('#f-sp-hint'); if (sh) sh.hidden = m !== 'sponsor'; }
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#overlay').hidden) closeSheet(); });
 $('#auto').addEventListener('change', e => { S.auto = e.target.checked; lsSet('gbid-auto', S.auto ? '1' : '0'); });
@@ -2440,4 +2445,3 @@ function readHash() {
 </script>
 </body>
 </html>
-
