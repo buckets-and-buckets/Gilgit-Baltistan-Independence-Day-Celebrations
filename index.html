@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#27479A">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src blob:; worker-src blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex,nofollow">
 <title>GB Independence Day Entry</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,11 +38,13 @@ h1{font:600 21px/1.2 var(--display);margin:0;text-wrap:balance}
 .live.on .dot{background:var(--ok)}
 .strip{display:grid;gap:8px}
 .strip.s2{grid-template-columns:repeat(2,minmax(0,1fr))}.strip.s3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.strip.s5{grid-template-columns:repeat(6,minmax(0,1fr))}.strip.s5 .stat{grid-column:span 2}.strip.s5 .stat:nth-child(n+4){grid-column:span 3}
+.stat b.neg,.rows b.neg{color:var(--bad)}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
 .stat b{display:block;font-size:20px;font-variant-numeric:tabular-nums;line-height:1.2}
 .stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
 nav{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;background:var(--line);padding:4px;border-radius:12px}
-nav button{border:0;background:transparent;color:var(--muted);font:600 14px var(--body);padding:11px 6px;border-radius:9px;cursor:pointer}
+nav button{border:0;background:transparent;color:var(--muted);font:600 13px var(--body);padding:11px 2px;border-radius:9px;cursor:pointer}
 nav button[aria-selected="true"]{background:var(--surface);color:var(--ink)}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%;min-width:0}
@@ -108,12 +113,6 @@ label.check input{width:22px;height:22px;flex-shrink:0}
 h2{font:600 17px var(--display);margin:0 0 6px}
 .logrow{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
 .logrow .t{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
-.exrow{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:start;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer}
-.exrow.void{opacity:.55}.exrow.void .g-name{text-decoration:line-through}
-.exrow .amt{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
-.exrow .amt .pill{display:inline-block;margin-top:4px;font-weight:700}
-.neg{color:var(--bad)}.pos{color:var(--ok)}
-nav.five button{font-size:13px;padding:11px 2px}
 .overlay{position:fixed;inset:0;background:rgba(8,12,18,.55);display:flex;align-items:flex-end;justify-content:center;z-index:20;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) 0 env(safe-area-inset-left,0px)}
 .sheet{background:var(--bg);width:100%;max-width:560px;max-height:92%;overflow-y:auto;border-radius:16px 16px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px}
 .ticket{background:#FFFFFF;color:#16202C;border:1px solid #D9DFE6;border-radius:16px;overflow:hidden;text-align:center}
@@ -147,6 +146,7 @@ window.APP_CONFIG = {
   tagline:   'Live music and dinner buffet',
   venue:     'Intercity Hotel, Bausher',
   currency:  'OMR',
+  pricePerHead: 10,   // ticket price per head in OMR (admin can still change it in Summary)
 
   // The public address of this page once it is on GitHub Pages, for example
   // 'https://yourname.github.io/gb-event/'. It is written inside every QR code.
@@ -155,11 +155,16 @@ window.APP_CONFIG = {
 
   // Emails that get the ADMIN role. Must match the list in firestore.rules (lowercase).
   // Everyone else who signs in is gate staff (scan and admit only).
-  adminEmails: ['admin@example.com'],
+  adminEmails: ['admin@gbevent.com'],
 
   // Paste your Firebase web app settings here (Firebase console > Project settings).
   // Leave as null to run in DEMO MODE (data stays on this one device).
-  firebase: null
+  firebase: {
+    apiKey: 'AIzaSyBpxZBIqk5diFyk1kK3vMPogpLIJ1BCyms',
+    authDomain: 'gb-independence-day.firebaseapp.com',
+    projectId: 'gb-independence-day',
+    appId: '1:677167998048:web:95a76b01c31e929e084f05'
+  }
   /* Example:
   firebase: {
     apiKey: '...', authDomain: 'your-project.firebaseapp.com',
@@ -178,7 +183,7 @@ window.APP_CONFIG = {
     </div>
     <div id="l-demo" class="demo" hidden></div>
     <form id="l-form" class="list" autocomplete="on">
-      <label>Email<input id="l-email" type="email" autocomplete="username" inputmode="email" required></label>
+      <label>Username<input id="l-email" type="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required></label>
       <label>Password<input id="l-pass" type="password" autocomplete="current-password" required></label>
       <button class="btn" type="submit" id="l-go">Sign in</button>
     </form>
@@ -243,8 +248,14 @@ window.APP_CONFIG = {
     </div>
   </section>
 
+  <section id="p-expenses" hidden>
+    <div class="list">
+      <button class="btn" data-act="exadd">Add expense</button>
+      <div id="exbody" class="list"></div>
+    </div>
+  </section>
+
   <section id="p-summary" hidden><div class="list" id="sumbody"></div></section>
-  <section id="p-expenses" hidden><div class="list" id="exbody"></div></section>
   <section id="p-log" hidden><div class="list" id="logbody"></div></section>
 </div>
 
@@ -1634,15 +1645,16 @@ async function makeFirebaseStore(cfg) {
       throw new Error('Could not create a unique ticket code. Try again.');
     },
     logScan: e => fs.addDoc(fs.collection(db, 'scans'), clean(e)),
-    addExpense: async data => (await fs.addDoc(fs.collection(db, 'expenses'), clean(data))).id,
-    updateExpense: (id, patch) => fs.updateDoc(fs.doc(db, 'expenses', id), clean(patch))
+    async addExpense(d) { const r = await fs.addDoc(fs.collection(db, 'expenses'), clean(d)); return r.id; },
+    updateExpense: (id, patch) => fs.updateDoc(fs.doc(db, 'expenses', id), clean(patch)),
+    deleteExpense: id => fs.deleteDoc(fs.doc(db, 'expenses', id))
   };
 }
 
 function makeDemoStore() {
   const KEY = 'gbid-demo-v2';
   const fresh = () => ({ cfg: {}, guests: {}, scans: [], expenses: {} });
-  const load = () => { try { const d = JSON.parse(localStorage.getItem(KEY)) || fresh(); d.expenses = d.expenses || {}; return d; } catch (e) { return fresh(); } };
+  const load = () => { let d = null; try { d = JSON.parse(localStorage.getItem(KEY)); } catch (e) {} d = d || fresh(); d.expenses = d.expenses || {}; return d; };
   let db = load(), userCb = null;
   const L = { config: new Set(), guests: new Set(), scans: new Set(), expenses: new Set() };
   const guestsArr = () => Object.values(db.guests).map(g => ({ ...g }));
@@ -1688,8 +1700,9 @@ function makeDemoStore() {
       save(); return nc;
     },
     async logScan(e) { db.scans.push({ ...clean(e), id: String(Date.now()) + Math.random().toString(36).slice(2, 6) }); if (db.scans.length > 1000) db.scans.shift(); save(); },
-    async addExpense(data) { const id = 'e' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); db.expenses[id] = { ...clean(data), id }; save(); return id; },
+    async addExpense(d) { const id = 'x' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); db.expenses[id] = { ...clean(d), id }; save(); return id; },
     async updateExpense(id, patch) { if (!db.expenses[id]) throw new Error('Expense not found'); Object.assign(db.expenses[id], clean(patch)); save(); },
+    async deleteExpense(id) { delete db.expenses[id]; save(); },
     clearAll() { db = fresh(); save(); }
   };
 }
@@ -1698,7 +1711,8 @@ function makeDemoStore() {
    STATE AND HELPERS
    ============================================================ */
 let Store = null;
-const S = { user: null, admin: false, cfg: { price: null, date: '' }, guests: [], scans: [], expenses: [], exFilter: 'all', loaded: false, conn: 'Connecting',
+const DEFAULT_PRICE = (CFG.pricePerHead != null && !isNaN(+CFG.pricePerHead)) ? +CFG.pricePerHead : null;
+const S = { user: null, admin: false, cfg: { price: DEFAULT_PRICE, date: '' }, guests: [], scans: [], expenses: [], exLoaded: false, loaded: false, conn: 'Connecting',
   tab: 'scan', filter: 'all', logFilter: 'all', openId: null, verdict: null, auto: lsGet('gbid-auto', '1') === '1', pending: null, handling: false };
 const ui = {};            // per-guest door state {n, method}
 let overlayState = {}, unsubs = [];
@@ -1712,11 +1726,11 @@ const balOf = g => Math.max(0, dueOf(g) - paidOf(g));
 const inOf = g => +g.arrived || 0;
 const remOf = g => Math.max(0, (+g.heads || 0) - inOf(g));
 const isPaid = g => !!g.paidFull;
-const liveEx = () => S.expenses.filter(e => e.status !== 'void');
-const spentTotal = () => liveEx().reduce((a, e) => a + (+e.amount || 0), 0);
-const collectedTotal = () => live().reduce((a, g) => a + paidOf(g), 0);
-const netTotal = () => collectedTotal() - spentTotal();
 const payState = g => g.paidFull ? 'paid' : (paidOf(g) > 0 ? 'partial' : 'unpaid');
+const EXP_CATS = ['Venue', 'Food & catering', 'Artist & music', 'Sound, lights & stage', 'Decor & printing', 'Marketing', 'Transport', 'Other'];
+const expTotal = () => S.expenses.reduce((a, e) => a + (+e.amount || 0), 0);
+const todayStr = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+const dayStr = d => { if (!d) return ''; const t = new Date(d + 'T00:00:00'); return isNaN(t) ? d : t.toLocaleDateString([], { day: '2-digit', month: 'short', year: 'numeric' }); };
 function calcPay(heads, paid) {
   const due = priced() ? heads * S.cfg.price : 0;
   return { due, paidFull: priced() && paid > 0 && paid >= due - 0.0005 };
@@ -1890,7 +1904,7 @@ async function decodePhoto(file) {
    ============================================================ */
 function payPill(g) {
   const s = payState(g);
-  if (s === 'paid') return '<span class="pill ok">Paid</span>';
+  if (s === 'paid') return '<span class="pill ok">Paid</span>' + (g.sponsor ? '<span class="pill info">Sponsor</span>' : '');
   if (s === 'partial') return `<span class="pill warn">Balance ${fmt(balOf(g))}</span>`;
   return priced() ? `<span class="pill bad">Unpaid ${fmt(dueOf(g))}</span>` : '<span class="pill bad">Unpaid</span>';
 }
@@ -1912,18 +1926,18 @@ function renderHeader() {
 }
 function renderStats() {
   const L = live(), heads = L.reduce((a, g) => a + (+g.heads || 0), 0), inn = L.reduce((a, g) => a + inOf(g), 0);
-  const col = L.reduce((a, g) => a + paidOf(g), 0), net = col - spentTotal();
+  const col = L.reduce((a, g) => a + paidOf(g), 0), due = L.reduce((a, g) => a + balOf(g), 0), ex = expTotal(), net = col - ex;
   const st = $('#strip');
-  st.className = 'strip ' + (S.admin ? 's3' : 's2');
+  st.className = 'strip ' + (S.admin ? 's5' : 's2');
   setHTML(st, S.admin
-    ? `<div class="stat"><b>${inn} / ${heads}</b><span>Guests in</span></div><div class="stat"><b>${fmt(col)}</b><span>${CUR} collected</span></div><div class="stat"><b class="${net < 0 ? 'neg' : ''}">${fmt(net)}</b><span>${CUR} net balance</span></div>`
+    ? `<div class="stat"><b>${inn} / ${heads}</b><span>Guests in</span></div><div class="stat"><b>${fmt(col)}</b><span>${CUR} collected</span></div><div class="stat"><b>${fmt(due)}</b><span>${CUR} due</span></div><div class="stat"><b>${fmt(ex)}</b><span>${CUR} expenses</span></div><div class="stat"><b${net < 0 ? ' class="neg"' : ''}>${fmt(net)}</b><span>${CUR} net funds</span></div>`
     : `<div class="stat"><b>${inn}</b><span>Guests in</span></div><div class="stat"><b>${heads - inn}</b><span>Still to arrive</span></div>`);
 }
 function renderNav() {
-  const tabs = S.admin ? [['scan', 'Scan'], ['guests', 'Guests'], ['summary', 'Summary'], ['expenses', 'Expenses'], ['log', 'Log']] : [['scan', 'Scan']];
-  const n = $('#nav'); n.hidden = tabs.length < 2; n.classList.toggle('five', tabs.length > 4);
+  const tabs = S.admin ? [['scan', 'Scan'], ['guests', 'Guests'], ['expenses', 'Expenses'], ['summary', 'Summary'], ['log', 'Log']] : [['scan', 'Scan']];
+  const n = $('#nav'); n.hidden = tabs.length < 2;
   setHTML(n, tabs.map(([k, l]) => `<button role="tab" data-tab="${k}" aria-selected="${S.tab === k}">${l}</button>`).join(''));
-  ['scan', 'guests', 'summary', 'expenses', 'log'].forEach(t => $('#p-' + t).hidden = t !== S.tab);
+  ['scan', 'guests', 'expenses', 'summary', 'log'].forEach(t => $('#p-' + t).hidden = t !== S.tab);
 }
 
 function renderScan() {
@@ -2001,9 +2015,8 @@ function renderSummary() {
   const L = live(), heads = L.reduce((a, g) => a + (+g.heads || 0), 0), inn = L.reduce((a, g) => a + inOf(g), 0);
   const pre = L.filter(g => g.type !== 'walkin').reduce((a, g) => a + (+g.heads || 0), 0);
   const exp = L.reduce((a, g) => a + dueOf(g), 0), col = L.reduce((a, g) => a + paidOf(g), 0), out = L.reduce((a, g) => a + balOf(g), 0);
+  const ex = expTotal(), net = col - ex, netAll = exp - ex;
   const by = {}; L.forEach(g => { if (paidOf(g) > 0) { const m = g.method || 'Not recorded'; by[m] = (by[m] || 0) + paidOf(g); } });
-  const exBy = {}; liveEx().forEach(e => { const m = e.method || 'Not recorded'; exBy[m] = (exBy[m] || 0) + (+e.amount || 0); });
-  const spent = spentTotal(), net = col - spent, methods = Array.from(new Set([...Object.keys(by), ...Object.keys(exBy)]));
   const cnt = k => L.filter(g => payState(g) === k).length, cancelled = S.guests.length - L.length;
   const demo = Store.mode === 'demo' ? `<div class="card"><h2>Demo tools</h2><div class="row2"><button class="btn ghost" data-act="sample">Load sample guests</button><button class="btn danger" data-act="clearall">Clear all demo data</button></div></div>` : '';
   const h = `
@@ -2019,13 +2032,9 @@ function renderSummary() {
       <div><span>Registered</span><b>${heads}</b></div><div><span>Pre-booked</span><b>${pre}</b></div><div><span>Walk-ins</span><b>${heads - pre}</b></div>
       <div><span>Inside now</span><b>${inn}</b></div><div><span>Still to arrive</span><b>${heads - inn}</b></div>${cancelled ? `<div><span>Cancelled bookings</span><b>${cancelled}</b></div>` : ''}</div></div>
     <div class="card"><h2>Money (${CUR})</h2><div class="rows">
-      <div><span>Collected from guests</span><b>${fmt(col)}</b></div>
-      <div><span>Expenses paid</span><b>− ${fmt(spent)}</b></div>
-      <div><span><b>Net balance</b></span><b class="${net < 0 ? 'neg' : 'pos'}">${fmt(net)}</b></div>
-      <div><span>Still to collect from guests</span><b>${fmt(out)}</b></div>
-      <div><span>Net balance if all dues are collected</span><b class="${net + out < 0 ? 'neg' : ''}">${fmt(net + out)}</b></div>
-      <div><span>Bookings paid / part / unpaid</span><b>${cnt('paid')} / ${cnt('partial')} / ${cnt('unpaid')}</b></div></div></div>
-    <div class="card"><h2>Balance by payment method</h2><div class="rows">${methods.length ? methods.map(m => { const c = by[m] || 0, x = exBy[m] || 0, n = c - x; return `<div><span>${esc(m)} <span class="hint">in ${fmt(c)} · out ${fmt(x)}</span></span><b class="${n < 0 ? 'neg' : ''}">${fmt(n)}</b></div>`; }).join('') : '<div><span class="hint">No payments or expenses recorded yet</span></div>'}</div></div>
+      <div><span>Expected</span><b>${fmt(exp)}</b></div><div><span>Collected</span><b>${fmt(col)}</b></div><div><span>Expenses (${S.expenses.length})</span><b>− ${fmt(ex)}</b></div><div><span><strong>Net funds raised</strong> (collected less expenses)</span><b${net < 0 ? ' class="neg"' : ''}>${fmt(net)}</b></div><div><span>Still to collect</span><b>${fmt(out)}</b></div><div><span>Net once everything is collected</span><b${netAll < 0 ? ' class="neg"' : ''}>${fmt(netAll)}</b></div>
+      <div><span>Bookings paid / part / unpaid</span><b>${cnt('paid')} / ${cnt('partial')} / ${cnt('unpaid')}</b></div>${L.some(g => g.sponsor) ? `<div><span>Sponsors (${L.filter(g => g.sponsor).length}) extra amount</span><b>${fmt(L.reduce((a, g) => a + (g.sponsor ? (+g.sponsorExtra || 0) : 0), 0))}</b></div>` : ''}</div></div>
+    <div class="card"><h2>Collected by method</h2><div class="rows">${Object.keys(by).length ? Object.keys(by).map(m => `<div><span>${esc(m)}</span><b>${fmt(by[m])}</b></div>`).join('') : '<div><span class="hint">No payments recorded yet</span></div>'}</div></div>
     <button class="btn ghost" data-act="export" ${S.guests.length ? '' : 'disabled'}>Download guest list (CSV)</button>${demo}`;
   const el = $('#sumbody');
   if (!el.contains(document.activeElement) || document.activeElement === document.body) setHTML(el, h);
@@ -2040,91 +2049,25 @@ function renderLog() {
   const body = rows.length ? rows.map(s => { const [l, c] = RES_LABEL[s.result] || [s.result, 'info']; return `<div class="logrow"><span class="t">${esc(dateTimeStr(s.t))}</span><div style="min-width:0"><div class="g-name" style="font-size:15px">${esc(s.name || 'Unknown')}${s.n ? ' ×' + s.n : ''}</div><div class="g-meta">${esc(fmtCode(s.code))} · ${esc(s.by)}</div></div><span class="pill ${c}">${l}</span></div>`; }).join('') : '<div class="empty"><b>No scans yet</b>Every scan at the gate is recorded here with who scanned it.</div>';
   setHTML($('#logbody'), sum + `<div class="chips">${fl}</div>` + body);
 }
-const EX_CATS = ['Artist fee', 'Venue and buffet', 'Sound and lighting', 'Decoration and stage', 'Printing and marketing', 'Transport and stay', 'Staff and security', 'Permits and licences', 'Other'];
-const todayStr = () => { const d = new Date(), p = n => String(n).padStart(2, '0'); return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()); };
-const dayStr = v => { const m = String(v || '').match(/^(\d{4})-(\d{2})-(\d{2})$/); return m ? new Date(+m[1], +m[2] - 1, +m[3]).toLocaleDateString([], { day: '2-digit', month: 'short', year: 'numeric' }) : ''; };
 function renderExpenses() {
-  const all = S.expenses.slice().sort((a, b) => String(b.date).localeCompare(String(a.date)) || (b.createdAt || 0) - (a.createdAt || 0));
-  const spent = spentTotal(), col = collectedTotal(), net = col - spent, cats = {};
-  liveEx().forEach(e => { const c = e.category || 'Other'; cats[c] = (cats[c] || 0) + (+e.amount || 0); });
-  const hasVoid = S.expenses.some(e => e.status === 'void'), f = S.exFilter;
-  const list = all.filter(e => f === 'all' || (f === 'void' ? e.status === 'void' : e.status !== 'void' && (e.category || 'Other') === f));
-  const chips = [['all', 'All'], ...Object.keys(cats).sort().map(c => [c, c]), ...(hasVoid ? [['void', 'Voided']] : [])]
-    .map(([k, l]) => `<button class="chip" data-act="exfilter" data-k="${esc(k)}" aria-pressed="${f === k}">${esc(l)}</button>`).join('');
-  const rows = list.length ? list.map(e => `<button class="exrow ${e.status === 'void' ? 'void' : ''}" data-act="exedit" data-id="${esc(e.id)}">
-      <div style="min-width:0"><div class="g-name">${esc(e.description || e.category)}</div><div class="g-meta">${esc(dayStr(e.date))} · ${esc(e.category || 'Other')}${e.vendor ? ' · ' + esc(e.vendor) : ''} · ${esc(e.method || '')}${e.ref ? ' · ' + esc(e.ref) : ''}</div></div>
-      <div class="amt">− ${fmt(e.amount)}${e.status === 'void' ? '<br><span class="pill done">Voided</span>' : ''}</div></button>`).join('')
-    : (S.expenses.length ? '<div class="empty"><b>No expenses match</b>Change the filter.</div>' : '<div class="empty"><b>No expenses yet</b>Add each cost when it is paid. It is deducted from the net balance straight away.</div>');
-  setHTML($('#exbody'), `<div class="card"><div class="rows">
-      <div><span>Collected from guests</span><b>${fmt(col)}</b></div>
-      <div><span>Expenses paid</span><b>− ${fmt(spent)}</b></div>
-      <div><span><b>Net balance (${CUR})</b></span><b class="${net < 0 ? 'neg' : 'pos'}">${fmt(net)}</b></div></div></div>
-    <div class="row2"><button class="btn" data-act="exadd">Add expense</button><button class="btn ghost" data-act="exexport" ${S.expenses.length ? '' : 'disabled'}>Download CSV</button></div>
-    ${Object.keys(cats).length ? `<div class="card"><h2>Spent by category</h2><div class="rows">${Object.keys(cats).sort((a, b) => cats[b] - cats[a]).map(c => `<div><span>${esc(c)}</span><b>${fmt(cats[c])}</b></div>`).join('')}</div></div>` : ''}
-    ${S.expenses.length ? `<div class="filters">${chips}</div>` : ''}
-    <div class="list">${rows}</div>`);
-}
-function exPreview() {
-  const el = $('#x-prev'); if (!el) return;
-  const amt = parseFloat($('#x-amt').value) || 0, old = overlayState.exId ? S.expenses.find(x => x.id === overlayState.exId) : null;
-  const base = netTotal() + (old && old.status !== 'void' ? +old.amount || 0 : 0), after = base - amt;
-  el.className = 'hint ' + (after < 0 ? 'neg' : '');
-  el.textContent = `Net balance after this expense: ${fmt(after)} ${CUR}${after < 0 ? '. This is more than the money collected so far.' : ''}`;
-}
-function expenseSheet(id) {
-  const e = id ? S.expenses.find(x => x.id === id) : { date: todayStr(), category: EX_CATS[0], description: '', amount: '', method: 'Cash', vendor: '', ref: '', notes: '' };
-  if (!e) return;
-  overlayState = { exId: id, dupOk: false };
-  const isVoid = e.status === 'void';
-  openSheet(`<h2>${id ? 'Edit expense' : 'Add expense'}</h2>
-    ${isVoid ? '<div class="banner">This expense is voided. It no longer counts against the balance.</div>' : ''}
-    <div class="row2"><label>Date<input id="x-date" type="date" value="${esc(e.date)}"></label>
-    <label>Amount (${CUR})<input id="x-amt" type="number" step="0.001" min="0" inputmode="decimal" value="${esc(e.amount)}"></label></div>
-    <label>Category<select id="x-cat">${EX_CATS.map(c => `<option ${e.category === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></label>
-    <label>What was it for<input id="x-desc" value="${esc(e.description)}" autocomplete="off"></label>
-    <div class="row2"><label>Paid by<select id="x-method">${METHODS.map(m => `<option ${e.method === m ? 'selected' : ''}>${m}</option>`).join('')}</select></label>
-    <label>Paid to (vendor)<input id="x-vendor" value="${esc(e.vendor)}" autocomplete="off"></label></div>
-    <label>Invoice or receipt number<input id="x-ref" value="${esc(e.ref)}" autocomplete="off"></label>
-    <label>Notes<input id="x-notes" value="${esc(e.notes)}" autocomplete="off"></label>
-    <div id="x-prev" class="hint"></div>
-    <div id="x-warn" class="banner" hidden></div>
-    <button class="btn" data-act="exsave">Save expense</button>
-    ${id && !isVoid ? '<button class="btn danger" data-act="exvoid">Void this expense</button>' : ''}
-    ${id && isVoid ? '<button class="btn ghost" data-act="exrestore">Restore this expense</button>' : ''}
-    <button class="btn ghost" data-act="close">Close</button>`);
-  exPreview();
-}
-async function expenseSave(btn) {
-  const amount = Math.round((parseFloat($('#x-amt').value) || 0) * 1000) / 1000, date = $('#x-date').value, desc = $('#x-desc').value.trim(), ref = $('#x-ref').value.trim();
-  if (!(amount > 0)) { toast('Enter the amount', true); return; }
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) { toast('Choose the date', true); return; }
-  if (!desc) { toast('Say what the expense was for', true); return; }
-  const vendor = $('#x-vendor').value.trim();
-  if (ref && !overlayState.dupOk) {
-    const dup = liveEx().find(x => x.id !== overlayState.exId && (x.ref || '').toLowerCase() === ref.toLowerCase() && (x.vendor || '').toLowerCase() === vendor.toLowerCase());
-    if (dup) { const w = $('#x-warn'); w.hidden = false; w.textContent = `This receipt number is already recorded for ${dup.description} (${fmt(dup.amount)} ${CUR}). Tap Save again to record it anyway.`; overlayState.dupOk = true; return; }
-  }
-  const data = { date, amount, category: $('#x-cat').value, description: desc, method: $('#x-method').value, vendor, ref, notes: $('#x-notes').value.trim() };
-  btn.disabled = true;
-  try {
-    if (overlayState.exId) await Store.updateExpense(overlayState.exId, { ...data, editedBy: S.user.email, editedAt: Date.now() });
-    else await Store.addExpense({ ...data, status: 'active', createdBy: S.user.email, createdAt: Date.now() });
-    closeSheet(); toast('Expense saved. Net balance updated.');
-  } catch (e) { btn.disabled = false; toast('Could not save: ' + niceErr(e), true); }
-}
-function exportExpensesCsv() {
-  const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
-  const rows = [['Date', 'Category', 'Description', 'Amount', 'Paid by', 'Vendor', 'Invoice or receipt', 'Notes', 'Status', 'Recorded by']];
-  S.expenses.slice().sort((a, b) => String(a.date).localeCompare(String(b.date))).forEach(e => rows.push([e.date, e.category, e.description, fmt(e.amount), e.method, e.vendor, e.ref, e.notes, e.status === 'void' ? 'Voided' : 'Active', e.createdBy]));
-  rows.push([], ['', '', 'Total active expenses', fmt(spentTotal())], ['', '', 'Collected from guests', fmt(collectedTotal())], ['', '', 'Net balance', fmt(netTotal())]);
-  downloadBlob(new Blob(['\ufeff' + rows.map(r => r.map(q).join(',')).join('\n')], { type: 'text/csv;charset=utf-8' }), 'gb-independence-day-expenses.csv');
+  const col = live().reduce((a, g) => a + paidOf(g), 0), tot = expTotal(), net = col - tot;
+  const list = S.expenses.slice().sort((a, b) => (b.date || '').localeCompare(a.date || '') || (b.createdAt || 0) - (a.createdAt || 0));
+  const cat = {}; list.forEach(e => { const c = e.category || 'Other'; cat[c] = (cat[c] || 0) + (+e.amount || 0); });
+  const sum = `<div class="card"><h2>Funds (${CUR})</h2><div class="rows"><div><span>Collected</span><b>${fmt(col)}</b></div><div><span>Expenses (${list.length})</span><b>− ${fmt(tot)}</b></div><div><span><strong>Net funds</strong></span><b${net < 0 ? ' class="neg"' : ''}>${fmt(net)}</b></div></div></div>`;
+  let body;
+  if (!S.exLoaded) body = '<div class="empty"><b>Loading expenses</b>One moment.</div>';
+  else if (!list.length) body = '<div class="empty"><b>No expenses yet</b>Tap Add expense to record money spent on the event. It is deducted from the funds collected.</div>';
+  else body = list.map(e => `<article class="g"><button class="g-head" data-act="exedit" data-id="${esc(e.id)}"><div style="min-width:0"><div class="g-name">${esc(e.desc || 'Expense')}</div><div class="g-meta">${[esc(e.category || 'Other'), esc(dayStr(e.date)), e.vendor ? esc(e.vendor) : ''].filter(Boolean).join(' · ')}</div></div><div class="pills"><span class="pill warn">− ${fmt(e.amount)}</span></div></button></article>`).join('');
+  const keys = Object.keys(cat).sort((a, b) => cat[b] - cat[a]);
+  const bycat = keys.length ? `<div class="card"><h2>By category (${CUR})</h2><div class="rows">${keys.map(c => `<div><span>${esc(c)}</span><b>${fmt(cat[c])}</b></div>`).join('')}</div></div>` : '';
+  setHTML($('#exbody'), sum + body + bycat + `<button class="btn ghost" data-act="exexport" ${list.length ? '' : 'disabled'}>Download expenses (CSV)</button>`);
 }
 function renderAll() {
   renderHeader(); renderStats();
   if (S.tab === 'scan') renderScan();
   if (S.tab === 'guests') renderGuests();
-  if (S.tab === 'summary') renderSummary();
   if (S.tab === 'expenses') renderExpenses();
+  if (S.tab === 'summary') renderSummary();
   if (S.tab === 'log') renderLog();
 }
 function showTab(t) {
@@ -2174,8 +2117,38 @@ async function walkinSave(btn) {
   } catch (e) { btn.disabled = false; toast('Could not save: ' + niceErr(e), true); }
 }
 
+/* ---- add / edit expense ---- */
+function expenseSheet(id) {
+  const e = id ? S.expenses.find(x => x.id === id) : { desc: '', amount: '', category: '', date: todayStr(), vendor: '', notes: '' };
+  if (!e) return;
+  overlayState = { exid: id || null };
+  openSheet(`<h2>${id ? 'Edit expense' : 'Add expense'}</h2>
+    <label>What was it for<input id="x-desc" value="${esc(e.desc)}" autocomplete="off"></label>
+    <div class="row2"><label>Amount (${CUR})<input id="x-amt" type="number" step="0.001" min="0" inputmode="decimal" value="${esc(e.amount)}"></label>
+    <label>Date<input id="x-date" type="date" value="${esc(e.date)}"></label></div>
+    <label>Category<select id="x-cat"><option value="">Choose</option>${EXP_CATS.map(c => `<option ${e.category === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></label>
+    <label>Paid to (vendor)<input id="x-vendor" value="${esc(e.vendor)}" autocomplete="off"></label>
+    <label>Notes or receipt ref<input id="x-notes" value="${esc(e.notes)}" autocomplete="off"></label>
+    <div class="hint">This amount is deducted from the funds collected.</div>
+    <button class="btn" data-act="exsave">Save</button>
+    ${id ? '<button class="btn danger" data-act="exdel">Delete expense</button>' : ''}
+    <button class="btn ghost" data-act="close">Close</button>`);
+}
+async function expenseSave(btn) {
+  const desc = $('#x-desc').value.trim(), amount = Math.round(parseFloat($('#x-amt').value) * 1000) / 1000;
+  if (!desc) { toast('Enter what the expense was for', true); return; }
+  if (isNaN(amount) || amount <= 0) { toast('Enter the amount spent', true); return; }
+  const data = { desc, amount, date: $('#x-date').value || todayStr(), category: $('#x-cat').value || 'Other', vendor: $('#x-vendor').value.trim(), notes: $('#x-notes').value.trim() };
+  btn.disabled = true;
+  try {
+    if (overlayState.exid) await Store.updateExpense(overlayState.exid, { ...data, updatedAt: Date.now(), updatedBy: S.user.email });
+    else await Store.addExpense({ ...data, createdAt: Date.now(), createdBy: S.user.email });
+    closeSheet(); toast('Expense saved');
+  } catch (e) { btn.disabled = false; toast('Could not save: ' + niceErr(e), true); }
+}
+
 /* ---- add / edit guest ---- */
-const payModeOf = g => paidOf(g) <= 0 ? 'none' : (g.paidFull ? 'full' : 'part');
+const payModeOf = g => paidOf(g) <= 0 ? 'none' : (g.paidFull ? (g.sponsor ? 'sponsor' : 'full') : 'part');
 function guestSheet(code) {
   const g = code ? byCode(code) : { name: '', phone: '', heads: 1, type: 'prebooked', paid: 0, method: '', ref: '', notes: '' };
   if (!g) return;
@@ -2187,9 +2160,9 @@ function guestSheet(code) {
     <label>Name<input id="f-name" value="${esc(g.name)}" autocomplete="off"></label>
     <div class="row2"><label>Phone<input id="f-phone" value="${esc(g.phone)}" inputmode="tel"></label>
     <label>Guests<input id="f-heads" type="number" min="1" max="50" value="${esc(g.heads)}" inputmode="numeric"></label></div>
-    <label>Payment<select id="f-pay"><option value="none" ${mode === 'none' ? 'selected' : ''}>Not paid yet</option><option value="full" ${mode === 'full' ? 'selected' : ''}>Paid in full</option><option value="part" ${mode === 'part' ? 'selected' : ''}>Part payment</option></select></label>
+    <label>Payment<select id="f-pay"><option value="none" ${mode === 'none' ? 'selected' : ''}>Not paid yet</option><option value="full" ${mode === 'full' ? 'selected' : ''}>Paid in full</option><option value="part" ${mode === 'part' ? 'selected' : ''}>Part payment</option><option value="sponsor" ${mode === 'sponsor' ? 'selected' : ''}>Sponsor (paid extra)</option></select></label>
     <div id="f-paid-box" ${mode === 'none' ? 'hidden' : ''} class="list">
-      <div id="f-amt-row" ${mode === 'part' ? '' : 'hidden'}><label>Amount paid (${CUR})<input id="f-paid" type="number" step="0.001" min="0" value="${paidOf(g) || ''}" inputmode="decimal"></label></div>
+      <div id="f-amt-row" ${mode === 'part' || mode === 'sponsor' ? '' : 'hidden'}><label>Amount paid (${CUR})<input id="f-paid" type="number" step="0.001" min="0" value="${paidOf(g) || ''}" inputmode="decimal"></label><div id="f-sp-hint" class="hint" ${mode === 'sponsor' ? '' : 'hidden'}>Sponsor: enter the total amount paid. It must be more than the ticket price for the guests. The extra is recorded as sponsorship.</div></div>
       <div class="row2"><label>Method<select id="f-method"><option value="">Choose</option>${METHODS.map(m => `<option ${g.method === m ? 'selected' : ''}>${m}</option>`).join('')}</select></label>
       <label>Receipt or transfer ref<input id="f-ref" value="${esc(g.ref)}"></label></div>
     </div>
@@ -2216,10 +2189,15 @@ async function guestSave(btn) {
   let paid = 0;
   if (mode === 'full') { if (!priced()) { toast('Set the price per head first, or choose Part payment', true); return; } paid = heads * S.cfg.price; }
   else if (mode === 'part') paid = Math.max(0, parseFloat($('#f-paid').value) || 0);
+  else if (mode === 'sponsor') {
+    if (!priced()) { toast('Set the price per head first', true); return; }
+    paid = Math.max(0, parseFloat($('#f-paid').value) || 0);
+    if (paid <= heads * S.cfg.price + 0.0005) { toast(`Sponsor amount must be more than ${fmt(heads * S.cfg.price)} ${CUR}`, true); return; }
+  }
   const method = mode === 'none' ? '' : $('#f-method').value;
   if (paid > 0 && !method) { toast('Choose how they paid', true); return; }
   const pay = calcPay(heads, paid);
-  const data = { name, phone, heads, paid, due: pay.due, paidFull: pay.paidFull, method, ref: mode === 'none' ? '' : $('#f-ref').value.trim(), notes: $('#f-notes').value.trim() };
+  const data = { name, phone, heads, paid, due: pay.due, paidFull: pay.paidFull, sponsor: mode === 'sponsor', sponsorExtra: mode === 'sponsor' ? Math.round((paid - pay.due) * 1000) / 1000 : 0, method, ref: mode === 'none' ? '' : $('#f-ref').value.trim(), notes: $('#f-notes').value.trim() };
   btn.disabled = true;
   try {
     let g;
@@ -2341,10 +2319,18 @@ function showGuestTicket(p) {
 }
 
 /* ---------- CSV ---------- */
+function exportExpensesCsv() {
+  const q = s => '"' + String(s ?? '').replace(/"/g, '""') + '"';
+  const rows = [['Date', 'Description', 'Category', 'Paid to', 'Amount', 'Notes', 'Added by']];
+  S.expenses.slice().sort((a, b) => (a.date || '').localeCompare(b.date || '')).forEach(e => rows.push([e.date, e.desc, e.category, e.vendor, fmt(e.amount), e.notes, e.createdBy]));
+  const col = live().reduce((a, g) => a + paidOf(g), 0), tot = expTotal();
+  rows.push([], ['', 'Total expenses', '', '', fmt(tot)], ['', 'Funds collected', '', '', fmt(col)], ['', 'Net funds', '', '', fmt(col - tot)]);
+  downloadBlob(new Blob(['\ufeff' + rows.map(r => r.map(q).join(',')).join('\n')], { type: 'text/csv;charset=utf-8' }), 'gb-independence-day-expenses.csv');
+}
 function exportCsv() {
   const q = s => '"' + String(s ?? '').replace(/"/g, '""') + '"';
-  const rows = [['Name','Phone','Guests','Registration','Status','Due','Paid','Balance','Method','Reference','Ticket code','Arrived','Collected by','Notes']];
-  S.guests.slice().sort((a, b) => (a.name || '').localeCompare(b.name || '')).forEach(g => rows.push([g.name, g.phone, g.heads, g.type === 'walkin' ? 'Walk-in' : 'Pre-booked', g.status === 'revoked' ? 'Cancelled' : 'Active', fmt(dueOf(g)), fmt(paidOf(g)), fmt(balOf(g)), g.method, g.ref, fmtCode(g.code), inOf(g), g.collectedBy, g.notes]));
+  const rows = [['Name','Phone','Guests','Registration','Status','Due','Paid','Balance','Method','Reference','Ticket code','Arrived','Collected by','Notes','Sponsor','Sponsor extra']];
+  S.guests.slice().sort((a, b) => (a.name || '').localeCompare(b.name || '')).forEach(g => rows.push([g.name, g.phone, g.heads, g.type === 'walkin' ? 'Walk-in' : 'Pre-booked', g.status === 'revoked' ? 'Cancelled' : 'Active', fmt(dueOf(g)), fmt(paidOf(g)), fmt(balOf(g)), g.method, g.ref, fmtCode(g.code), inOf(g), g.collectedBy, g.notes, g.sponsor ? 'Yes' : '', g.sponsor ? fmt(+g.sponsorExtra || 0) : '']));
   downloadBlob(new Blob(['﻿' + rows.map(r => r.map(q).join(',')).join('\n')], { type: 'text/csv;charset=utf-8' }), 'gb-independence-day-guests.csv');
 }
 
@@ -2382,10 +2368,7 @@ async function loadSamples() {
       const due = heads * price, paid = mode === 'full' ? due : mode === 'part' ? Math.round(due / 2) : 0;
       await Store.createGuest({ name, phone, heads, type: 'prebooked', paid, due, paidFull: paid >= due && paid > 0, method: paid ? 'Cash' : '', ref: '', notes: 'Sample data', status: 'active', arrived: 0, arrivedAt: 0, lastBy: '', lastN: 0, createdAt: now, createdBy: S.user.email, replacedBy: null });
     }
-    const td = todayStr();
-    for (const [category, description, amount, method, vendor] of [['Artist fee', 'Artist fee advance', 150, 'Bank transfer', 'Sample vendor'], ['Sound and lighting', 'Sound system hire', 40, 'Cash', 'Sample vendor']])
-      await Store.addExpense({ date: td, category, description, amount, method, vendor, ref: '', notes: 'Sample data', status: 'active', createdBy: S.user.email, createdAt: now });
-    toast('Sample guests and expenses added');
+    toast('Sample guests added');
   } catch (e) { toast('Could not add samples: ' + niceErr(e), true); }
 }
 
@@ -2431,20 +2414,18 @@ document.addEventListener('click', async ev => {
         if (b.dataset.sure) { await Store.deleteGuest(overlayState.code); closeSheet(); toast('Record deleted'); }
         else { b.dataset.sure = '1'; b.textContent = 'Tap again to delete for good'; }
         break;
+      case 'exadd': expenseSheet(null); break;
+      case 'exedit': expenseSheet(id); break;
+      case 'exsave': expenseSave(b); break;
+      case 'exdel':
+        if (b.dataset.sure) { await Store.deleteExpense(overlayState.exid); closeSheet(); toast('Expense deleted'); }
+        else { b.dataset.sure = '1'; b.textContent = 'Tap again to delete for good'; }
+        break;
+      case 'exexport': exportExpensesCsv(); break;
       case 'tkshare': ticketShare(); break;
       case 'tkpng': ticketSave(); break;
       case 'tkcopy': if (overlayState.ticket) copyText(personalLink(overlayState.ticket)); break;
       case 'gt-save': if (overlayState.ticket) downloadBlob(await overlayState.png, ticketFile(overlayState.ticket)); break;
-      case 'exadd': expenseSheet(null); break;
-      case 'exedit': expenseSheet(id); break;
-      case 'exsave': expenseSave(b); break;
-      case 'exfilter': S.exFilter = b.dataset.k; renderExpenses(); break;
-      case 'exexport': exportExpensesCsv(); break;
-      case 'exvoid':
-        if (b.dataset.sure) { await Store.updateExpense(overlayState.exId, { status: 'void', voidedBy: S.user.email, voidedAt: Date.now() }); closeSheet(); toast('Expense voided. Net balance updated.'); }
-        else { b.dataset.sure = '1'; b.textContent = 'Tap again to void this expense'; }
-        break;
-      case 'exrestore': await Store.updateExpense(overlayState.exId, { status: 'active', voidedBy: null, voidedAt: null }); closeSheet(); toast('Expense restored'); break;
       case 'import': importSheet(); break;
       case 'doimport': doImport(b); break;
       case 'close': closeSheet(); break;
@@ -2461,9 +2442,8 @@ document.addEventListener('click', async ev => {
   } catch (e) { toast(niceErr(e), true); }
 });
 document.addEventListener('change', e => {
-  if (e.target.id === 'f-pay') { const m = e.target.value; $('#f-paid-box').hidden = m === 'none'; $('#f-amt-row').hidden = m !== 'part'; }
+  if (e.target.id === 'f-pay') { const m = e.target.value; $('#f-paid-box').hidden = m === 'none'; $('#f-amt-row').hidden = m !== 'part' && m !== 'sponsor'; const sh = $('#f-sp-hint'); if (sh) sh.hidden = m !== 'sponsor'; }
 });
-document.addEventListener('input', e => { if (e.target.id === 'x-amt') exPreview(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#overlay').hidden) closeSheet(); });
 $('#auto').addEventListener('change', e => { S.auto = e.target.checked; lsSet('gbid-auto', S.auto ? '1' : '0'); });
 $('#q').addEventListener('input', () => {
@@ -2488,11 +2468,12 @@ document.addEventListener('visibilitychange', () => { if (document.hidden && cam
 function showView(v) { ['boot', 'login', 'main', 'ticket'].forEach(x => $('#v-' + x).hidden = x !== v); }
 function showLogin() {
   unsubs.forEach(u => { try { u(); } catch (e) {} }); unsubs = [];
-  S.user = null; S.admin = false; S.loaded = false; S.guests = []; S.scans = []; S.expenses = []; S.verdict = null; S.openId = null;
+  S.user = null; S.admin = false; S.loaded = false; S.guests = []; S.scans = []; S.expenses = []; S.exLoaded = false; S.verdict = null; S.openId = null;
   $('#l-title').textContent = CFG.eventName; $('#l-sub').textContent = [CFG.featuring, CFG.venue].filter(Boolean).join(' · ');
   const demo = Store.mode === 'demo';
-  $('#l-form').hidden = demo; $('#l-roles').hidden = !demo; $('#l-demo').hidden = !demo;
-  $('#l-demo').textContent = 'Demo mode: no Firebase settings found, so data stays on this device only. Choose a role to try the app.';
+  const local = /^(localhost|127\.0\.0\.1|)$/.test(location.hostname) || location.protocol === 'file:';
+  $('#l-form').hidden = demo; $('#l-roles').hidden = !demo || !local; $('#l-demo').hidden = !demo;
+  $('#l-demo').textContent = local ? 'Demo mode: no Firebase settings found, so data stays on this device only. Choose a role to try the app.' : 'Live mode is not set up yet. The owner must add the Firebase settings in index.html before anyone can sign in.';
   $('#l-err').textContent = ''; showView('login');
 }
 function showMain(u) {
@@ -2504,22 +2485,22 @@ function showMain(u) {
   $('#h-title').textContent = CFG.eventName;
   showView('main'); renderNav(); renderAll();
   const onErr = what => e => { S.conn = 'Offline'; renderHeader(); toast(what + ': ' + niceErr(e), true); };
-  unsubs.push(Store.watch('config', c => { S.cfg = { price: c && c.price != null ? +c.price : null, date: (c && c.date) || '' }; renderAll(); }, onErr('Settings')));
+  unsubs.push(Store.watch('config', c => { S.cfg = { price: c && c.price != null ? +c.price : DEFAULT_PRICE, date: (c && c.date) || '' }; renderAll(); }, onErr('Settings')));
   unsubs.push(Store.watch('guests', gs => {
     S.guests = gs; S.loaded = true; S.conn = 'Live';
     if (S.openId && !byCode(S.openId)) S.openId = null;
     renderAll();
     if (S.pending) { const c = S.pending; S.pending = null; handleCode(c); }
   }, onErr('Guest list')));
+  if (S.admin) unsubs.push(Store.watch('expenses', x => { S.expenses = x; S.exLoaded = true; renderAll(); }, onErr('Expenses')));
   if (S.admin) unsubs.push(Store.watch('scans', s => { S.scans = s; if (S.tab === 'log') renderLog(); }, onErr('Scan log')));
-  if (S.admin) unsubs.push(Store.watch('expenses', x => { S.expenses = x; renderAll(); }, e => toast('Expenses: ' + (/permission/.test((e && e.code) || '') ? 'update the database rules from firestore.rules (see the guide)' : niceErr(e)), true)));
 }
 $('#l-form').addEventListener('submit', async e => {
   e.preventDefault(); const btn = $('#l-go'); btn.disabled = true; $('#l-err').textContent = '';
-  try { await Store.login($('#l-email').value.trim(), $('#l-pass').value); }
+  try { const u0 = $('#l-email').value.trim().toLowerCase(); await Store.login(u0.includes('@') ? u0 : u0 + '@gbevent.com', $('#l-pass').value); }
   catch (err) {
     const c = (err && err.code) || '';
-    $('#l-err').textContent = /invalid-credential|wrong-password|user-not-found|invalid-email/.test(c) ? 'Wrong email or password.' : /too-many/.test(c) ? 'Too many attempts. Wait a few minutes and try again.' : /network/.test(c) ? 'No connection. Check the internet and try again.' : 'Could not sign in: ' + errMsg(err);
+    $('#l-err').textContent = /invalid-credential|wrong-password|user-not-found|invalid-email/.test(c) ? 'Wrong username or password.' : /too-many/.test(c) ? 'Too many attempts. Wait a few minutes and try again.' : /network/.test(c) ? 'No connection. Check the internet and try again.' : /operation-not-allowed/.test(c) ? 'Email/Password sign-in is not switched on in Firebase (Authentication > Sign-in method).' : /unauthorized-domain/.test(c) ? 'This website address is not added in Firebase (Authentication > Settings > Authorized domains).' : /api-key/.test(c) ? 'The Firebase apiKey in this page is wrong.' : 'Could not sign in: ' + errMsg(err);
   } finally { btn.disabled = false; }
 });
 function readHash() {
