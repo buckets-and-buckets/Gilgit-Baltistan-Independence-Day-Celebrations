@@ -2138,11 +2138,11 @@ function expenseSheet(id) {
     <label>What was it for<input id="x-desc" value="${esc(e.desc)}" autocomplete="off"></label>
     <div class="row2"><label>Amount (${CUR})<input id="x-amt" type="number" step="0.001" min="0" inputmode="decimal" value="${esc(e.amount)}"></label>
     <label>Date<input id="x-date" type="date" value="${esc(e.date)}"></label></div>
+    <div class="list"><div class="hint" style="font-weight:600">Bills and receipts</div><div id="x-bills" class="list"></div>
+    <button class="btn ghost" data-act="exattach">Attach bill (photo or PDF)</button></div>
     <label>Category<select id="x-cat"><option value="">Choose</option>${EXP_CATS.map(c => `<option ${e.category === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></label>
     <label>Paid to (vendor)<input id="x-vendor" value="${esc(e.vendor)}" autocomplete="off"></label>
     <label>Notes or receipt ref<input id="x-notes" value="${esc(e.notes)}" autocomplete="off"></label>
-    <div class="list"><div class="hint" style="font-weight:600">Bills and receipts</div><div id="x-bills" class="list"></div>
-    <button class="btn ghost" data-act="exattach">Attach bill (photo or PDF)</button></div>
     <div class="hint">This amount is deducted from the funds collected.</div>
     <button class="btn" data-act="exsave">Save</button>
     ${id ? '<button class="btn danger" data-act="exdel">Delete expense</button>' : ''}
