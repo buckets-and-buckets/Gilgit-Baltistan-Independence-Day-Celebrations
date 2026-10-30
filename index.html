@@ -40,6 +40,11 @@ h1{font:600 21px/1.2 var(--display);margin:0;text-wrap:balance}
 .strip.s2{grid-template-columns:repeat(2,minmax(0,1fr))}.strip.s3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .strip.s5{grid-template-columns:repeat(6,minmax(0,1fr))}.strip.s5 .stat{grid-column:span 2}.strip.s5 .stat:nth-child(n+4){grid-column:span 3}
 .stat b.neg,.rows b.neg{color:var(--bad)}
+.billrow{display:flex;align-items:center;gap:8px}
+.billview{display:flex;align-items:center;gap:10px;flex:1;min-width:0;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:6px;cursor:pointer;text-align:left;font:inherit}
+.billview img,.pdfic{width:48px;height:48px;flex-shrink:0;border-radius:6px;object-fit:cover}
+.pdfic{display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:12px}
+.billview .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
 .stat b{display:block;font-size:20px;font-variant-numeric:tabular-nums;line-height:1.2}
 .stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
@@ -163,7 +168,10 @@ window.APP_CONFIG = {
     apiKey: 'AIzaSyBpxZBIqk5diFyk1kK3vMPogpLIJ1BCyms',
     authDomain: 'gb-independence-day.firebaseapp.com',
     projectId: 'gb-independence-day',
-    appId: '1:677167998048:web:95a76b01c31e929e084f05'
+    storageBucket: 'gb-independence-day.firebasestorage.app',
+    messagingSenderId: '677167998048',
+    appId: '1:677167998048:web:95a76b01c31e929e084f05',
+    measurementId: 'G-V81K85BF1Y'
   }
   /* Example:
   firebase: {
@@ -1647,14 +1655,16 @@ async function makeFirebaseStore(cfg) {
     logScan: e => fs.addDoc(fs.collection(db, 'scans'), clean(e)),
     async addExpense(d) { const r = await fs.addDoc(fs.collection(db, 'expenses'), clean(d)); return r.id; },
     updateExpense: (id, patch) => fs.updateDoc(fs.doc(db, 'expenses', id), clean(patch)),
-    deleteExpense: id => fs.deleteDoc(fs.doc(db, 'expenses', id))
+    async deleteExpense(id) { await fs.deleteDoc(fs.doc(db, 'expenses', id)); try { await fs.deleteDoc(fs.doc(db, 'expenseBills', id)); } catch (e) {} },
+    async getBills(id) { const d = await fs.getDoc(fs.doc(db, 'expenseBills', id)); return d.exists() ? (d.data().files || []) : []; },
+    setBills: (id, files) => files.length ? fs.setDoc(fs.doc(db, 'expenseBills', id), { files }) : fs.deleteDoc(fs.doc(db, 'expenseBills', id))
   };
 }
 
 function makeDemoStore() {
   const KEY = 'gbid-demo-v2';
-  const fresh = () => ({ cfg: {}, guests: {}, scans: [], expenses: {} });
-  const load = () => { let d = null; try { d = JSON.parse(localStorage.getItem(KEY)); } catch (e) {} d = d || fresh(); d.expenses = d.expenses || {}; return d; };
+  const fresh = () => ({ cfg: {}, guests: {}, scans: [], expenses: {}, bills: {} });
+  const load = () => { let d = null; try { d = JSON.parse(localStorage.getItem(KEY)); } catch (e) {} d = d || fresh(); d.expenses = d.expenses || {}; d.bills = d.bills || {}; return d; };
   let db = load(), userCb = null;
   const L = { config: new Set(), guests: new Set(), scans: new Set(), expenses: new Set() };
   const guestsArr = () => Object.values(db.guests).map(g => ({ ...g }));
@@ -1702,7 +1712,9 @@ function makeDemoStore() {
     async logScan(e) { db.scans.push({ ...clean(e), id: String(Date.now()) + Math.random().toString(36).slice(2, 6) }); if (db.scans.length > 1000) db.scans.shift(); save(); },
     async addExpense(d) { const id = 'x' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); db.expenses[id] = { ...clean(d), id }; save(); return id; },
     async updateExpense(id, patch) { if (!db.expenses[id]) throw new Error('Expense not found'); Object.assign(db.expenses[id], clean(patch)); save(); },
-    async deleteExpense(id) { delete db.expenses[id]; save(); },
+    async deleteExpense(id) { delete db.expenses[id]; delete db.bills[id]; save(); },
+    async getBills(id) { return (db.bills[id] || []).map(x => ({ ...x })); },
+    async setBills(id, files) { if (files.length) db.bills[id] = files; else delete db.bills[id]; save(); },
     clearAll() { db = fresh(); save(); }
   };
 }
@@ -2057,7 +2069,7 @@ function renderExpenses() {
   let body;
   if (!S.exLoaded) body = '<div class="empty"><b>Loading expenses</b>One moment.</div>';
   else if (!list.length) body = '<div class="empty"><b>No expenses yet</b>Tap Add expense to record money spent on the event. It is deducted from the funds collected.</div>';
-  else body = list.map(e => `<article class="g"><button class="g-head" data-act="exedit" data-id="${esc(e.id)}"><div style="min-width:0"><div class="g-name">${esc(e.desc || 'Expense')}</div><div class="g-meta">${[esc(e.category || 'Other'), esc(dayStr(e.date)), e.vendor ? esc(e.vendor) : ''].filter(Boolean).join(' · ')}</div></div><div class="pills"><span class="pill warn">− ${fmt(e.amount)}</span></div></button></article>`).join('');
+  else body = list.map(e => `<article class="g"><button class="g-head" data-act="exedit" data-id="${esc(e.id)}"><div style="min-width:0"><div class="g-name">${esc(e.desc || 'Expense')}</div><div class="g-meta">${[esc(e.category || 'Other'), esc(dayStr(e.date)), e.vendor ? esc(e.vendor) : ''].filter(Boolean).join(' · ')}</div></div><div class="pills"><span class="pill warn">− ${fmt(e.amount)}</span>${+e.billCount > 0 ? `<span class="pill info">${e.billCount} ${+e.billCount === 1 ? 'bill' : 'bills'}</span>` : ''}</div></button></article>`).join('');
   const keys = Object.keys(cat).sort((a, b) => cat[b] - cat[a]);
   const bycat = keys.length ? `<div class="card"><h2>By category (${CUR})</h2><div class="rows">${keys.map(c => `<div><span>${esc(c)}</span><b>${fmt(cat[c])}</b></div>`).join('')}</div></div>` : '';
   setHTML($('#exbody'), sum + body + bycat + `<button class="btn ghost" data-act="exexport" ${list.length ? '' : 'disabled'}>Download expenses (CSV)</button>`);
@@ -2129,22 +2141,88 @@ function expenseSheet(id) {
     <label>Category<select id="x-cat"><option value="">Choose</option>${EXP_CATS.map(c => `<option ${e.category === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></label>
     <label>Paid to (vendor)<input id="x-vendor" value="${esc(e.vendor)}" autocomplete="off"></label>
     <label>Notes or receipt ref<input id="x-notes" value="${esc(e.notes)}" autocomplete="off"></label>
+    <div class="list"><div class="hint" style="font-weight:600">Bills and receipts</div><div id="x-bills" class="list"></div>
+    <button class="btn ghost" data-act="exattach">Attach bill (photo or PDF)</button></div>
     <div class="hint">This amount is deducted from the funds collected.</div>
     <button class="btn" data-act="exsave">Save</button>
     ${id ? '<button class="btn danger" data-act="exdel">Delete expense</button>' : ''}
-    <button class="btn ghost" data-act="close">Close</button>`);
+    <button class="btn ghost" data-act="close">Close</button>
+    <input id="x-file" type="file" accept="image/*,application/pdf" multiple hidden>`);
+  const o = overlayState, need = !!(id && +e.billCount > 0);
+  o.bills = []; o.billsLoaded = !need; o.billsChanged = false; o.billsErr = false;
+  renderBills();
+  if (need) Store.getBills(id).then(f => { if (overlayState !== o) return; o.bills = f; o.billsLoaded = true; renderBills(); })
+    .catch(err => { if (overlayState !== o) return; o.billsErr = true; o.billsLoaded = true; renderBills(); toast('Could not load bills: ' + niceErr(err), true); });
+}
+const SAFE_IMG = /^data:image\/(jpeg|png|webp|gif);base64,[A-Za-z0-9+\/=]+$/;
+function renderBills() {
+  const el = $('#x-bills'); if (!el) return; const o = overlayState;
+  if (!o.billsLoaded) { el.innerHTML = '<div class="hint">Loading bills…</div>'; return; }
+  if (o.billsErr) { el.innerHTML = '<div class="hint">Bills could not be loaded, so they cannot be changed right now.</div>'; return; }
+  el.innerHTML = o.bills.length ? o.bills.map((b, i) => `<div class="billrow"><button class="billview" data-act="exview" data-i="${i}">${SAFE_IMG.test(b.data || '') ? `<img src="${b.data}" alt="">` : '<span class="pdfic">PDF</span>'}<span class="nm">${esc(b.name)}</span></button><button class="btn danger small" data-act="exrm" data-i="${i}" aria-label="Remove ${esc(b.name)}">Remove</button></div>`).join('') : '<div class="hint">No bills attached yet.</div>';
+}
+const readDataUrl = f => new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = () => rej(r.error); r.readAsDataURL(f); });
+async function compressImage(file) {
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('bad image')); i.src = url; });
+    let out = '';
+    for (const [mx, q] of [[1400, .72], [1200, .6], [1000, .5], [800, .45]]) {
+      const k = Math.min(1, mx / Math.max(img.naturalWidth, img.naturalHeight)), cv = document.createElement('canvas');
+      cv.width = Math.max(1, Math.round(img.naturalWidth * k)); cv.height = Math.max(1, Math.round(img.naturalHeight * k));
+      const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height); cx.drawImage(img, 0, 0, cv.width, cv.height);
+      out = cv.toDataURL('image/jpeg', q); if (out.length <= 250000) break;
+    }
+    return out;
+  } finally { URL.revokeObjectURL(url); }
+}
+async function addBills(files) {
+  const o = overlayState;
+  for (const f of files) {
+    if (overlayState !== o) return;
+    try {
+      let item;
+      if (/^image\//.test(f.type)) item = { name: f.name || 'bill.jpg', type: 'image/jpeg', data: await compressImage(f) };
+      else if (f.type === 'application/pdf') {
+        const data = await readDataUrl(f);
+        if (data.length > 600000) { toast('That PDF is too large (about 450 KB max). Attach a photo of the bill instead.', true); continue; }
+        item = { name: f.name || 'bill.pdf', type: 'application/pdf', data };
+      } else { toast('Attach a photo or a PDF', true); continue; }
+      if (o.bills.reduce((a, b) => a + b.data.length, 0) + item.data.length > 900000) { toast('Too many bills on this expense. Remove one first.', true); continue; }
+      o.bills.push(item); o.billsChanged = true;
+    } catch (err) { toast('Could not read ' + (f.name || 'that file'), true); }
+  }
+  if (overlayState === o) renderBills();
+}
+function viewBill(i) {
+  const b = overlayState.bills && overlayState.bills[i]; if (!b) return;
+  const m = /^data:([^;]+);base64,(.*)$/.exec(b.data || ''); if (!m) return;
+  const bin = atob(m[2]), arr = new Uint8Array(bin.length); for (let k = 0; k < bin.length; k++) arr[k] = bin.charCodeAt(k);
+  const blob = new Blob([arr], { type: m[1] });
+  if (m[1] === 'application/pdf') { downloadBlob(blob, b.name || 'bill.pdf'); return; }
+  const u = URL.createObjectURL(blob);
+  if (!window.open(u, '_blank')) downloadBlob(blob, b.name || 'bill.jpg');
+  setTimeout(() => URL.revokeObjectURL(u), 60000);
 }
 async function expenseSave(btn) {
   const desc = $('#x-desc').value.trim(), amount = Math.round(parseFloat($('#x-amt').value) * 1000) / 1000;
   if (!desc) { toast('Enter what the expense was for', true); return; }
   if (isNaN(amount) || amount <= 0) { toast('Enter the amount spent', true); return; }
   const data = { desc, amount, date: $('#x-date').value || todayStr(), category: $('#x-cat').value || 'Other', vendor: $('#x-vendor').value.trim(), notes: $('#x-notes').value.trim() };
-  btn.disabled = true;
+  const o = overlayState;
+  if (!o.billsLoaded) { toast('Bills are still loading. Try again in a moment.', true); return; }
+  if (o.billsChanged) data.billCount = o.bills.length;
+  btn.disabled = true; btn.textContent = 'Saving…';
+  let id = o.exid;
   try {
-    if (overlayState.exid) await Store.updateExpense(overlayState.exid, { ...data, updatedAt: Date.now(), updatedBy: S.user.email });
-    else await Store.addExpense({ ...data, createdAt: Date.now(), createdBy: S.user.email });
-    closeSheet(); toast('Expense saved');
-  } catch (e) { btn.disabled = false; toast('Could not save: ' + niceErr(e), true); }
+    if (id) await Store.updateExpense(id, { ...data, updatedAt: Date.now(), updatedBy: S.user.email });
+    else id = await Store.addExpense({ ...data, billCount: o.bills.length, createdAt: Date.now(), createdBy: S.user.email });
+  } catch (e) { btn.disabled = false; btn.textContent = 'Save'; toast('Could not save: ' + niceErr(e), true); return; }
+  if (o.billsChanged) {
+    try { await Store.setBills(id, o.bills); }
+    catch (e) { btn.disabled = false; btn.textContent = 'Save'; o.exid = id; toast('Expense saved, but the bills were not: ' + niceErr(e), true); try { await Store.updateExpense(id, { billCount: 0 }); } catch (e2) {} return; }
+  }
+  closeSheet(); toast('Expense saved');
 }
 
 /* ---- add / edit guest ---- */
@@ -2321,8 +2399,8 @@ function showGuestTicket(p) {
 /* ---------- CSV ---------- */
 function exportExpensesCsv() {
   const q = s => '"' + String(s ?? '').replace(/"/g, '""') + '"';
-  const rows = [['Date', 'Description', 'Category', 'Paid to', 'Amount', 'Notes', 'Added by']];
-  S.expenses.slice().sort((a, b) => (a.date || '').localeCompare(b.date || '')).forEach(e => rows.push([e.date, e.desc, e.category, e.vendor, fmt(e.amount), e.notes, e.createdBy]));
+  const rows = [['Date', 'Description', 'Category', 'Paid to', 'Amount', 'Notes', 'Added by', 'Bills attached']];
+  S.expenses.slice().sort((a, b) => (a.date || '').localeCompare(b.date || '')).forEach(e => rows.push([e.date, e.desc, e.category, e.vendor, fmt(e.amount), e.notes, e.createdBy, +e.billCount || 0]));
   const col = live().reduce((a, g) => a + paidOf(g), 0), tot = expTotal();
   rows.push([], ['', 'Total expenses', '', '', fmt(tot)], ['', 'Funds collected', '', '', fmt(col)], ['', 'Net funds', '', '', fmt(col - tot)]);
   downloadBlob(new Blob(['\ufeff' + rows.map(r => r.map(q).join(',')).join('\n')], { type: 'text/csv;charset=utf-8' }), 'gb-independence-day-expenses.csv');
@@ -2422,6 +2500,9 @@ document.addEventListener('click', async ev => {
         else { b.dataset.sure = '1'; b.textContent = 'Tap again to delete for good'; }
         break;
       case 'exexport': exportExpensesCsv(); break;
+      case 'exattach': if (!overlayState.billsLoaded || overlayState.billsErr) toast('Bills are not available yet', true); else $('#x-file').click(); break;
+      case 'exview': viewBill(+b.dataset.i); break;
+      case 'exrm': if (overlayState.bills) { overlayState.bills.splice(+b.dataset.i, 1); overlayState.billsChanged = true; renderBills(); } break;
       case 'tkshare': ticketShare(); break;
       case 'tkpng': ticketSave(); break;
       case 'tkcopy': if (overlayState.ticket) copyText(personalLink(overlayState.ticket)); break;
@@ -2442,6 +2523,7 @@ document.addEventListener('click', async ev => {
   } catch (e) { toast(niceErr(e), true); }
 });
 document.addEventListener('change', e => {
+  if (e.target.id === 'x-file') { const fl = Array.from(e.target.files || []); e.target.value = ''; addBills(fl); return; }
   if (e.target.id === 'f-pay') { const m = e.target.value; $('#f-paid-box').hidden = m === 'none'; $('#f-amt-row').hidden = m !== 'part' && m !== 'sponsor'; const sh = $('#f-sp-hint'); if (sh) sh.hidden = m !== 'sponsor'; }
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#overlay').hidden) closeSheet(); });
